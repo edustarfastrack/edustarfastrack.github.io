@@ -8,10 +8,10 @@
 
 ]
 </script>
-<div class="inline-block">
+<nav class="md:inline-block hidden ">
     <ul class="flex flex-col md:flex-row">
     {#each navlinks as navlink(navlink.id)}
     <li class="p-5"><a href="{navlink.section}"class="hover:no-underline">{navlink.name}</a><li>
     {/each}
     </ul>
-</div>
+</nav>

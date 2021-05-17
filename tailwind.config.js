@@ -3,7 +3,12 @@ module.exports = {
   './src/**/*.js',],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        'Display':['PT Sans'],
+        'body':['Roboto']
+      },
+    },
   },
   variants: {
     extend: {},
