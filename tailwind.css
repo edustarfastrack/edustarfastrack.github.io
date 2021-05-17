@@ -11237,6 +11237,14 @@ video {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-Display {
+  font-family: PT Sans;
+}
+
+.font-body {
+  font-family: Roboto;
+}
+
 .font-thin {
   font-weight: 100;
 }
@@ -42523,6 +42531,14 @@ body{
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .sm\:font-Display {
+    font-family: PT Sans;
+  }
+
+  .sm\:font-body {
+    font-family: Roboto;
+  }
+
   .sm\:font-thin {
     font-weight: 100;
   }
@@ -73632,6 +73648,14 @@ body{
 
   .md\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .md\:font-Display {
+    font-family: PT Sans;
+  }
+
+  .md\:font-body {
+    font-family: Roboto;
   }
 
   .md\:font-thin {
@@ -104745,6 +104769,14 @@ body{
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .lg\:font-Display {
+    font-family: PT Sans;
+  }
+
+  .lg\:font-body {
+    font-family: Roboto;
+  }
+
   .lg\:font-thin {
     font-weight: 100;
   }
@@ -135856,6 +135888,14 @@ body{
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .xl\:font-Display {
+    font-family: PT Sans;
+  }
+
+  .xl\:font-body {
+    font-family: Roboto;
+  }
+
   .xl\:font-thin {
     font-weight: 100;
   }
@@ -166965,6 +167005,14 @@ body{
 
   .\32xl\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .\32xl\:font-Display {
+    font-family: PT Sans;
+  }
+
+  .\32xl\:font-body {
+    font-family: Roboto;
   }
 
   .\32xl\:font-thin {
