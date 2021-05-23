@@ -8,6 +8,17 @@ module.exports = {
         'Display':['PT Sans'],
         'body':['Roboto']
       },
+     width: {
+      "101":"30rem",
+      "110":"36rem",
+      "120":"40rem"
+      },
+      height: {
+        "101":"30rem",
+        "105":"33.5rem",
+        "110":"36rem",
+        "120":"40rem"
+        }
     },
   },
   variants: {
