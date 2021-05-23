@@ -1,4 +1,4 @@
-<div class="bg-white p-5 w-full rounded w-86 md:w-110">
+<div class="bg-white p-5 w-full rounded w-86 md:w-110" id="#Phone">
     <h2 class="font-dispalay text-2xl p-3">Connect With Us</h2>
     <div class="">
         <h3>From 9AM to 7PM IST</h3>

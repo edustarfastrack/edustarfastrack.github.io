@@ -34,6 +34,21 @@ var app = (function () {
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
+    function validate_store(store, name) {
+        if (store != null && typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, ...callbacks) {
+        if (store == null) {
+            return noop;
+        }
+        const unsub = store.subscribe(...callbacks);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
     function create_slot(definition, ctx, $$scope, fn) {
         if (definition) {
             const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
@@ -69,6 +84,9 @@ var app = (function () {
             const slot_context = get_slot_context(slot_definition, ctx, $$scope, get_slot_context_fn);
             slot.p(slot_context, slot_changes);
         }
+    }
+    function action_destroyer(action_result) {
+        return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
     }
 
     const is_client = typeof window !== 'undefined';
@@ -1318,6 +1336,9 @@ var app = (function () {
     	}
     }
 
+    function cubicInOut(t) {
+        return t < 0.5 ? 4.0 * t * t * t : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0;
+    }
     function cubicOut(t) {
         const f = t - 1.0;
         return f * f * f + 1.0;
@@ -1358,6 +1379,208 @@ var app = (function () {
         };
     }
 
+    var _ = {
+      $(selector) {
+        if (typeof selector === "string") {
+          return document.querySelector(selector);
+        }
+        return selector;
+      },
+      extend(...args) {
+        return Object.assign(...args);
+      },
+      cumulativeOffset(element) {
+        let top = 0;
+        let left = 0;
+
+        do {
+          top += element.offsetTop || 0;
+          left += element.offsetLeft || 0;
+          element = element.offsetParent;
+        } while (element);
+
+        return {
+          top: top,
+          left: left
+        };
+      },
+      directScroll(element) {
+        return element && element !== document && element !== document.body;
+      },
+      scrollTop(element, value) {
+        let inSetter = value !== undefined;
+        if (this.directScroll(element)) {
+          return inSetter ? (element.scrollTop = value) : element.scrollTop;
+        } else {
+          return inSetter
+            ? (document.documentElement.scrollTop = document.body.scrollTop = value)
+            : window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop ||
+                0;
+        }
+      },
+      scrollLeft(element, value) {
+        let inSetter = value !== undefined;
+        if (this.directScroll(element)) {
+          return inSetter ? (element.scrollLeft = value) : element.scrollLeft;
+        } else {
+          return inSetter
+            ? (document.documentElement.scrollLeft = document.body.scrollLeft = value)
+            : window.pageXOffset ||
+                document.documentElement.scrollLeft ||
+                document.body.scrollLeft ||
+                0;
+        }
+      }
+    };
+
+    const defaultOptions = {
+      container: "body",
+      duration: 500,
+      delay: 0,
+      offset: 0,
+      easing: cubicInOut,
+      onStart: noop,
+      onDone: noop,
+      onAborting: noop,
+      scrollX: false,
+      scrollY: true
+    };
+
+    const _scrollTo = options => {
+      let {
+        offset,
+        duration,
+        delay,
+        easing,
+        x=0,
+        y=0,
+        scrollX,
+        scrollY,
+        onStart,
+        onDone,
+        container,
+        onAborting,
+        element
+      } = options;
+
+      if (typeof offset === "function") {
+        offset = offset();
+      }
+
+      var cumulativeOffsetContainer = _.cumulativeOffset(container);
+      var cumulativeOffsetTarget = element
+        ? _.cumulativeOffset(element)
+        : { top: y, left: x };
+
+      var initialX = _.scrollLeft(container);
+      var initialY = _.scrollTop(container);
+
+      var targetX =
+        cumulativeOffsetTarget.left - cumulativeOffsetContainer.left + offset;
+      var targetY =
+        cumulativeOffsetTarget.top - cumulativeOffsetContainer.top + offset;
+
+      var diffX = targetX - initialX;
+    	var diffY = targetY - initialY;
+
+      let scrolling = true;
+      let started = false;
+      let start_time = now() + delay;
+      let end_time = start_time + duration;
+
+      function scrollToTopLeft(element, top, left) {
+        if (scrollX) _.scrollLeft(element, left);
+        if (scrollY) _.scrollTop(element, top);
+      }
+
+      function start(delayStart) {
+        if (!delayStart) {
+          started = true;
+          onStart(element, {x, y});
+        }
+      }
+
+      function tick(progress) {
+        scrollToTopLeft(
+          container,
+          initialY + diffY * progress,
+          initialX + diffX * progress
+        );
+      }
+
+      function stop() {
+        scrolling = false;
+      }
+
+      loop(now => {
+        if (!started && now >= start_time) {
+          start(false);
+        }
+
+        if (started && now >= end_time) {
+          tick(1);
+          stop();
+          onDone(element, {x, y});
+        }
+
+        if (!scrolling) {
+          onAborting(element, {x, y});
+          return false;
+        }
+        if (started) {
+          const p = now - start_time;
+          const t = 0 + 1 * easing(p / duration);
+          tick(t);
+        }
+
+        return true;
+      });
+
+      start(delay);
+
+      tick(0);
+
+      return stop;
+    };
+
+    const proceedOptions = options => {
+    	let opts = _.extend({}, defaultOptions, options);
+      opts.container = _.$(opts.container);
+      opts.element = _.$(opts.element);
+      return opts;
+    };
+
+    const scrollTo = options => {
+      return _scrollTo(proceedOptions(options));
+    };
+
+    const makeScrollToAction = scrollToFunc => {
+      return (node, options) => {
+        let current = options;
+        const handle = e => {
+          e.preventDefault();
+          scrollToFunc(
+            typeof current === "string" ? { element: current } : current
+          );
+        };
+        node.addEventListener("click", handle);
+        node.addEventListener("touchstart", handle);
+        return {
+          update(options) {
+            current = options;
+          },
+          destroy() {
+            node.removeEventListener("click", handle);
+            node.removeEventListener("touchstart", handle);
+          }
+        };
+      };
+    };
+
+    const scrollto = makeScrollToAction(scrollTo);
+
     /* src/shared/Tabs.svelte generated by Svelte v3.38.2 */
     const file$o = "src/shared/Tabs.svelte";
 
@@ -1367,14 +1590,14 @@ var app = (function () {
     	return child_ctx;
     }
 
-    function get_each_context_1(ctx, list, i) {
+    function get_each_context_1$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[6] = list[i];
     	return child_ctx;
     }
 
-    // (15:8) {#each TabItems as Tab}
-    function create_each_block_1(ctx) {
+    // (16:8) {#each TabItems as Tab}
+    function create_each_block_1$1(ctx) {
     	let h2;
     	let t_value = /*Tab*/ ctx[6].name + "";
     	let t;
@@ -1395,7 +1618,7 @@ var app = (function () {
     			? "border-b-4 border-blue-500"
     			: ""));
 
-    			add_location(h2, file$o, 15, 11, 354);
+    			add_location(h2, file$o, 16, 11, 398);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -1425,17 +1648,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_1.name,
+    		id: create_each_block_1$1.name,
     		type: "each",
-    		source: "(15:8) {#each TabItems as Tab}",
+    		source: "(16:8) {#each TabItems as Tab}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (24:0) {#if sideNav }
-    function create_if_block$4(ctx) {
+    // (25:0) {#if sideNav }
+    function create_if_block$5(ctx) {
     	let div1;
     	let div0;
     	let div1_transition;
@@ -1458,9 +1681,9 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "flex flex-col justify-center items-center flex-wrap py-5");
-    			add_location(div0, file$o, 25, 4, 678);
+    			add_location(div0, file$o, 26, 4, 722);
     			attr_dev(div1, "class", "fixed left-0 top-1/2 z-50");
-    			add_location(div1, file$o, 24, 0, 618);
+    			add_location(div1, file$o, 25, 0, 662);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -1521,16 +1744,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$4.name,
+    		id: create_if_block$5.name,
     		type: "if",
-    		source: "(24:0) {#if sideNav }",
+    		source: "(25:0) {#if sideNav }",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:8) {#each TabItems as Tab}
+    // (28:8) {#each TabItems as Tab}
     function create_each_block$3(ctx) {
     	let h2;
     	let span;
@@ -1548,20 +1771,24 @@ var app = (function () {
     			h2 = element("h2");
     			span = element("span");
     			attr_dev(span, "class", span_class_value = /*Tab*/ ctx[6].icon);
-    			add_location(span, file$o, 29, 15, 1011);
+    			add_location(span, file$o, 30, 41, 1081);
 
     			attr_dev(h2, "class", h2_class_value = "font-Display text-2xl px-3 p-2 m-2 bg-gray-600 text-white cursor-pointer rounded-full " + (/*currentTab*/ ctx[2] === /*Tab*/ ctx[6].name
     			? " text-blue-500"
     			: ""));
 
-    			add_location(h2, file$o, 27, 11, 792);
+    			add_location(h2, file$o, 28, 11, 836);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
     			append_dev(h2, span);
 
     			if (!mounted) {
-    				dispose = listen_dev(h2, "click", click_handler_1, false, false, false);
+    				dispose = [
+    					listen_dev(h2, "click", click_handler_1, false, false, false),
+    					action_destroyer(scrollto.call(null, h2, "#AboutUs"))
+    				];
+
     				mounted = true;
     			}
     		},
@@ -1581,7 +1808,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(h2);
     			mounted = false;
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -1589,7 +1816,7 @@ var app = (function () {
     		block,
     		id: create_each_block$3.name,
     		type: "each",
-    		source: "(27:8) {#each TabItems as Tab}",
+    		source: "(28:8) {#each TabItems as Tab}",
     		ctx
     	});
 
@@ -1607,10 +1834,10 @@ var app = (function () {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value_1.length; i += 1) {
-    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    		each_blocks[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
     	}
 
-    	let if_block = /*sideNav*/ ctx[0] && create_if_block$4(ctx);
+    	let if_block = /*sideNav*/ ctx[0] && create_if_block$5(ctx);
 
     	const block = {
     		c: function create() {
@@ -1625,9 +1852,9 @@ var app = (function () {
     			if (if_block) if_block.c();
     			if_block_anchor = empty();
     			attr_dev(div0, "class", "flex justify-center items-center flex-wrap py-5");
-    			add_location(div0, file$o, 13, 4, 249);
+    			add_location(div0, file$o, 14, 4, 293);
     			attr_dev(div1, "class", "w-full");
-    			add_location(div1, file$o, 11, 0, 219);
+    			add_location(div1, file$o, 12, 0, 263);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1652,12 +1879,12 @@ var app = (function () {
     				let i;
 
     				for (i = 0; i < each_value_1.length; i += 1) {
-    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+    					const child_ctx = get_each_context_1$1(ctx, each_value_1, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block_1(child_ctx);
+    						each_blocks[i] = create_each_block_1$1(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(div0, null);
     					}
@@ -1678,7 +1905,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$4(ctx);
+    					if_block = create_if_block$5(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -1752,6 +1979,7 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		createEventDispatcher,
     		fade,
+    		scrollto,
     		sideNav,
     		dispatch,
     		TabItems,
@@ -1831,7 +2059,7 @@ var app = (function () {
     }
 
     // (36:3) {#if img.id===currentImage}
-    function create_if_block$3(ctx) {
+    function create_if_block$4(ctx) {
     	let div;
     	let a;
     	let img;
@@ -1872,20 +2100,20 @@ var app = (function () {
     			if (img.src !== (img_src_value = "/img/" + /*img*/ ctx[4].name)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", /*img*/ ctx[4].name);
     			attr_dev(img, "class", "absolute");
-    			add_location(img, file$n, 38, 8, 741);
-    			add_location(br, file$n, 39, 90, 893);
+    			add_location(img, file$n, 38, 8, 748);
+    			add_location(br, file$n, 39, 90, 900);
     			attr_dev(i, "class", "fas fa-certificate text-yellow-300 text-2xl");
-    			add_location(i, file$n, 39, 140, 943);
+    			add_location(i, file$n, 39, 140, 950);
     			attr_dev(span, "class", "font-bold text-2xl");
-    			add_location(span, file$n, 39, 95, 898);
+    			add_location(span, file$n, 39, 95, 905);
     			attr_dev(p, "class", "bg-blue-500 p-3 absolute text-white bottom-0 right-0");
-    			add_location(p, file$n, 39, 8, 811);
+    			add_location(p, file$n, 39, 8, 818);
     			attr_dev(a, "href", "/img/" + /*img*/ ctx[4].name);
     			attr_dev(a, "data-lightbox", /*img*/ ctx[4].name);
     			attr_dev(a, "data-title", /*img*/ ctx[4].name);
-    			add_location(a, file$n, 37, 7, 655);
+    			add_location(a, file$n, 37, 7, 662);
     			attr_dev(div, "class", " ");
-    			add_location(div, file$n, 36, 3, 615);
+    			add_location(div, file$n, 36, 3, 622);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1929,7 +2157,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
+    		id: create_if_block$4.name,
     		type: "if",
     		source: "(36:3) {#if img.id===currentImage}",
     		ctx
@@ -1942,7 +2170,7 @@ var app = (function () {
     function create_each_block$2(ctx) {
     	let if_block_anchor;
     	let current;
-    	let if_block = /*img*/ ctx[4].id === /*currentImage*/ ctx[0] && create_if_block$3(ctx);
+    	let if_block = /*img*/ ctx[4].id === /*currentImage*/ ctx[0] && create_if_block$4(ctx);
 
     	const block = {
     		c: function create() {
@@ -1963,7 +2191,7 @@ var app = (function () {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$3(ctx);
+    					if_block = create_if_block$4(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -2027,7 +2255,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "relative md:w-96 w-72 md:h-105 h-96 text-center ");
+    			attr_dev(div, "class", "relative md:w-96 w-72 md:h-105 h-96 text-center ring-2 ");
     			add_location(div, file$n, 32, 0, 487);
     		},
     		l: function claim(nodes) {
@@ -2184,127 +2412,370 @@ var app = (function () {
     	}
     }
 
+    const subscriber_queue = [];
+    /**
+     * Create a `Writable` store that allows both updating and reading by subscription.
+     * @param {*=}value initial value
+     * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+     */
+    function writable(value, start = noop) {
+        let stop;
+        const subscribers = [];
+        function set(new_value) {
+            if (safe_not_equal(value, new_value)) {
+                value = new_value;
+                if (stop) { // store is ready
+                    const run_queue = !subscriber_queue.length;
+                    for (let i = 0; i < subscribers.length; i += 1) {
+                        const s = subscribers[i];
+                        s[1]();
+                        subscriber_queue.push(s, value);
+                    }
+                    if (run_queue) {
+                        for (let i = 0; i < subscriber_queue.length; i += 2) {
+                            subscriber_queue[i][0](subscriber_queue[i + 1]);
+                        }
+                        subscriber_queue.length = 0;
+                    }
+                }
+            }
+        }
+        function update(fn) {
+            set(fn(value));
+        }
+        function subscribe(run, invalidate = noop) {
+            const subscriber = [run, invalidate];
+            subscribers.push(subscriber);
+            if (subscribers.length === 1) {
+                stop = start(set) || noop;
+            }
+            run(value);
+            return () => {
+                const index = subscribers.indexOf(subscriber);
+                if (index !== -1) {
+                    subscribers.splice(index, 1);
+                }
+                if (subscribers.length === 0) {
+                    stop();
+                    stop = null;
+                }
+            };
+        }
+        return { set, update, subscribe };
+    }
+
+    function is_date(obj) {
+        return Object.prototype.toString.call(obj) === '[object Date]';
+    }
+
+    function get_interpolator(a, b) {
+        if (a === b || a !== a)
+            return () => a;
+        const type = typeof a;
+        if (type !== typeof b || Array.isArray(a) !== Array.isArray(b)) {
+            throw new Error('Cannot interpolate values of different type');
+        }
+        if (Array.isArray(a)) {
+            const arr = b.map((bi, i) => {
+                return get_interpolator(a[i], bi);
+            });
+            return t => arr.map(fn => fn(t));
+        }
+        if (type === 'object') {
+            if (!a || !b)
+                throw new Error('Object cannot be null');
+            if (is_date(a) && is_date(b)) {
+                a = a.getTime();
+                b = b.getTime();
+                const delta = b - a;
+                return t => new Date(a + t * delta);
+            }
+            const keys = Object.keys(b);
+            const interpolators = {};
+            keys.forEach(key => {
+                interpolators[key] = get_interpolator(a[key], b[key]);
+            });
+            return t => {
+                const result = {};
+                keys.forEach(key => {
+                    result[key] = interpolators[key](t);
+                });
+                return result;
+            };
+        }
+        if (type === 'number') {
+            const delta = b - a;
+            return t => a + t * delta;
+        }
+        throw new Error(`Cannot interpolate ${type} values`);
+    }
+    function tweened(value, defaults = {}) {
+        const store = writable(value);
+        let task;
+        let target_value = value;
+        function set(new_value, opts) {
+            if (value == null) {
+                store.set(value = new_value);
+                return Promise.resolve();
+            }
+            target_value = new_value;
+            let previous_task = task;
+            let started = false;
+            let { delay = 0, duration = 400, easing = identity, interpolate = get_interpolator } = assign(assign({}, defaults), opts);
+            if (duration === 0) {
+                if (previous_task) {
+                    previous_task.abort();
+                    previous_task = null;
+                }
+                store.set(value = target_value);
+                return Promise.resolve();
+            }
+            const start = now() + delay;
+            let fn;
+            task = loop(now => {
+                if (now < start)
+                    return true;
+                if (!started) {
+                    fn = interpolate(value, new_value);
+                    if (typeof duration === 'function')
+                        duration = duration(value, new_value);
+                    started = true;
+                }
+                if (previous_task) {
+                    previous_task.abort();
+                    previous_task = null;
+                }
+                const elapsed = now - start;
+                if (elapsed > duration) {
+                    store.set(value = new_value);
+                    return false;
+                }
+                // @ts-ignore
+                store.set(value = fn(easing(elapsed / duration)));
+                return true;
+            });
+            return task.promise;
+        }
+        return {
+            set,
+            update: (fn, opts) => set(fn(target_value, value), opts),
+            subscribe: store.subscribe
+        };
+    }
+
     /* src/components/about/WhyUs.svelte generated by Svelte v3.38.2 */
     const file$m = "src/components/about/WhyUs.svelte";
 
-    function create_fragment$p(ctx) {
-    	let div6;
-    	let div5;
+    // (23:8) <IntersectionObserver {element} bind:intersecting>
+    function create_default_slot$9(ctx) {
+    	let div3;
     	let div0;
-    	let imageslide;
-    	let t0;
-    	let div4;
-    	let div1;
     	let h30;
+    	let t0_value = /*$value*/ ctx[2].toFixed(0) + "";
+    	let t0;
+    	let t1;
     	let t2;
     	let p0;
     	let t4;
-    	let div2;
+    	let div1;
     	let h31;
+    	let t5_value = /*$value*/ ctx[2].toFixed(0) / 10 + "";
+    	let t5;
     	let t6;
+    	let t7;
     	let p1;
-    	let t8;
-    	let div3;
+    	let t9;
+    	let div2;
     	let h32;
+    	let t10_value = /*$value*/ ctx[2].toFixed(0) + "";
     	let t10;
+    	let t11;
+    	let t12;
     	let p2;
-    	let current;
-    	imageslide = new ImageSlide({ $$inline: true });
 
     	const block = {
     		c: function create() {
-    			div6 = element("div");
-    			div5 = element("div");
+    			div3 = element("div");
     			div0 = element("div");
-    			create_component(imageslide.$$.fragment);
-    			t0 = space();
-    			div4 = element("div");
-    			div1 = element("div");
     			h30 = element("h3");
-    			h30.textContent = "100+";
+    			t0 = text(t0_value);
+    			t1 = text("+");
     			t2 = space();
     			p0 = element("p");
     			p0.textContent = "Happy Students";
     			t4 = space();
-    			div2 = element("div");
+    			div1 = element("div");
     			h31 = element("h3");
-    			h31.textContent = "10+";
-    			t6 = space();
+    			t5 = text(t5_value);
+    			t6 = text("+");
+    			t7 = space();
     			p1 = element("p");
     			p1.textContent = "Years of Experience";
-    			t8 = space();
-    			div3 = element("div");
+    			t9 = space();
+    			div2 = element("div");
     			h32 = element("h3");
-    			h32.textContent = "100%";
-    			t10 = space();
+    			t10 = text(t10_value);
+    			t11 = text("%");
+    			t12 = space();
     			p2 = element("p");
     			p2.textContent = "Success Ratio";
-    			attr_dev(div0, "class", "flex justify-center items-center");
-    			add_location(div0, file$m, 7, 8, 170);
     			attr_dev(h30, "class", "font-bold font-Display text-5xl text-blue-600 mx-10");
-    			add_location(h30, file$m, 12, 16, 396);
+    			add_location(h30, file$m, 25, 16, 796);
     			attr_dev(p0, "class", "font-body text-xl");
-    			add_location(p0, file$m, 13, 16, 486);
-    			attr_dev(div1, "class", "p-3");
-    			add_location(div1, file$m, 11, 12, 362);
+    			add_location(p0, file$m, 26, 16, 902);
+    			attr_dev(div0, "class", "p-3");
+    			add_location(div0, file$m, 24, 12, 762);
     			attr_dev(h31, "class", "font-bold font-Display text-5xl text-red-600 mx-10");
-    			add_location(h31, file$m, 16, 16, 599);
+    			add_location(h31, file$m, 29, 16, 1015);
     			attr_dev(p1, "class", "font-body text-xl");
-    			add_location(p1, file$m, 17, 16, 687);
-    			attr_dev(div2, "class", "p-3");
-    			add_location(div2, file$m, 15, 12, 565);
+    			add_location(p1, file$m, 30, 16, 1123);
+    			attr_dev(div1, "class", "p-3");
+    			add_location(div1, file$m, 28, 12, 981);
     			attr_dev(h32, "class", "font-bold font-Display text-5xl text-blue-600 mx-10");
-    			add_location(h32, file$m, 20, 16, 805);
+    			add_location(h32, file$m, 33, 16, 1241);
     			attr_dev(p2, "class", "font-body text-xl");
-    			add_location(p2, file$m, 21, 16, 895);
-    			attr_dev(div3, "class", "p-3");
-    			add_location(div3, file$m, 19, 12, 771);
-    			attr_dev(div4, "class", "py-24 flex flex-col md:flex-row flex-wrap justify-center items-center");
-    			add_location(div4, file$m, 10, 8, 266);
-    			attr_dev(div5, "class", "");
-    			add_location(div5, file$m, 6, 4, 147);
-    			attr_dev(div6, "class", "p-5 text-center flex flex-col items-center justify-center");
-    			add_location(div6, file$m, 5, 0, 71);
+    			add_location(p2, file$m, 34, 16, 1347);
+    			attr_dev(div2, "class", "p-3");
+    			add_location(div2, file$m, 32, 12, 1207);
+    			attr_dev(div3, "class", "py-24 flex flex-col md:flex-row flex-wrap justify-center items-center overflow-hidden w-full");
+    			add_location(div3, file$m, 23, 8, 623);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, div0);
+    			append_dev(div0, h30);
+    			append_dev(h30, t0);
+    			append_dev(h30, t1);
+    			append_dev(div0, t2);
+    			append_dev(div0, p0);
+    			append_dev(div3, t4);
+    			append_dev(div3, div1);
+    			append_dev(div1, h31);
+    			append_dev(h31, t5);
+    			append_dev(h31, t6);
+    			append_dev(div1, t7);
+    			append_dev(div1, p1);
+    			append_dev(div3, t9);
+    			append_dev(div3, div2);
+    			append_dev(div2, h32);
+    			append_dev(h32, t10);
+    			append_dev(h32, t11);
+    			append_dev(div2, t12);
+    			append_dev(div2, p2);
+    			/*div3_binding*/ ctx[4](div3);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*$value*/ 4 && t0_value !== (t0_value = /*$value*/ ctx[2].toFixed(0) + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*$value*/ 4 && t5_value !== (t5_value = /*$value*/ ctx[2].toFixed(0) / 10 + "")) set_data_dev(t5, t5_value);
+    			if (dirty & /*$value*/ 4 && t10_value !== (t10_value = /*$value*/ ctx[2].toFixed(0) + "")) set_data_dev(t10, t10_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div3);
+    			/*div3_binding*/ ctx[4](null);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot$9.name,
+    		type: "slot",
+    		source: "(23:8) <IntersectionObserver {element} bind:intersecting>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$p(ctx) {
+    	let div2;
+    	let div1;
+    	let div0;
+    	let imageslide;
+    	let t;
+    	let intersectionobserver;
+    	let updating_intersecting;
+    	let current;
+    	imageslide = new ImageSlide({ $$inline: true });
+
+    	function intersectionobserver_intersecting_binding(value) {
+    		/*intersectionobserver_intersecting_binding*/ ctx[5](value);
+    	}
+
+    	let intersectionobserver_props = {
+    		element: /*element*/ ctx[1],
+    		$$slots: { default: [create_default_slot$9] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*intersecting*/ ctx[0] !== void 0) {
+    		intersectionobserver_props.intersecting = /*intersecting*/ ctx[0];
+    	}
+
+    	intersectionobserver = new IntersectionObserver_1({
+    			props: intersectionobserver_props,
+    			$$inline: true
+    		});
+
+    	binding_callbacks.push(() => bind(intersectionobserver, "intersecting", intersectionobserver_intersecting_binding));
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			create_component(imageslide.$$.fragment);
+    			t = space();
+    			create_component(intersectionobserver.$$.fragment);
+    			attr_dev(div0, "class", "flex justify-center items-center");
+    			add_location(div0, file$m, 19, 8, 468);
+    			attr_dev(div1, "class", "");
+    			add_location(div1, file$m, 18, 4, 445);
+    			attr_dev(div2, "class", "p-5 text-center flex flex-col items-center justify-center");
+    			add_location(div2, file$m, 17, 0, 369);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div6, anchor);
-    			append_dev(div6, div5);
-    			append_dev(div5, div0);
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div1);
+    			append_dev(div1, div0);
     			mount_component(imageslide, div0, null);
-    			append_dev(div5, t0);
-    			append_dev(div5, div4);
-    			append_dev(div4, div1);
-    			append_dev(div1, h30);
-    			append_dev(div1, t2);
-    			append_dev(div1, p0);
-    			append_dev(div4, t4);
-    			append_dev(div4, div2);
-    			append_dev(div2, h31);
-    			append_dev(div2, t6);
-    			append_dev(div2, p1);
-    			append_dev(div4, t8);
-    			append_dev(div4, div3);
-    			append_dev(div3, h32);
-    			append_dev(div3, t10);
-    			append_dev(div3, p2);
+    			append_dev(div1, t);
+    			mount_component(intersectionobserver, div1, null);
     			current = true;
     		},
-    		p: noop,
+    		p: function update(ctx, [dirty]) {
+    			const intersectionobserver_changes = {};
+    			if (dirty & /*element*/ 2) intersectionobserver_changes.element = /*element*/ ctx[1];
+
+    			if (dirty & /*$$scope, element, $value*/ 70) {
+    				intersectionobserver_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_intersecting && dirty & /*intersecting*/ 1) {
+    				updating_intersecting = true;
+    				intersectionobserver_changes.intersecting = /*intersecting*/ ctx[0];
+    				add_flush_callback(() => updating_intersecting = false);
+    			}
+
+    			intersectionobserver.$set(intersectionobserver_changes);
+    		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(imageslide.$$.fragment, local);
+    			transition_in(intersectionobserver.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(imageslide.$$.fragment, local);
+    			transition_out(intersectionobserver.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div6);
+    			if (detaching) detach_dev(div2);
     			destroy_component(imageslide);
+    			destroy_component(intersectionobserver);
     		}
     	};
 
@@ -2320,16 +2791,66 @@ var app = (function () {
     }
 
     function instance$p($$self, $$props, $$invalidate) {
+    	let $value;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("WhyUs", slots, []);
+    	const value = tweened(0, { duration: 1000, easing: cubicOut });
+    	validate_store(value, "value");
+    	component_subscribe($$self, value, value => $$invalidate(2, $value = value));
+    	let element;
+    	let intersecting;
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<WhyUs> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ ImageSlide });
-    	return [];
+    	function div3_binding($$value) {
+    		binding_callbacks[$$value ? "unshift" : "push"](() => {
+    			element = $$value;
+    			$$invalidate(1, element);
+    		});
+    	}
+
+    	function intersectionobserver_intersecting_binding(value) {
+    		intersecting = value;
+    		$$invalidate(0, intersecting);
+    	}
+
+    	$$self.$capture_state = () => ({
+    		ImageSlide,
+    		IntersectionObserver: IntersectionObserver_1,
+    		tweened,
+    		cubicOut,
+    		value,
+    		element,
+    		intersecting,
+    		$value
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("element" in $$props) $$invalidate(1, element = $$props.element);
+    		if ("intersecting" in $$props) $$invalidate(0, intersecting = $$props.intersecting);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*intersecting*/ 1) {
+    			intersecting ? value.set(100) : value.set(0);
+    		}
+    	};
+
+    	return [
+    		intersecting,
+    		element,
+    		$value,
+    		value,
+    		div3_binding,
+    		intersectionobserver_intersecting_binding
+    	];
     }
 
     class WhyUs extends SvelteComponentDev {
@@ -2674,7 +3195,7 @@ var app = (function () {
     }
 
     // (30:7) {#if currentTab==="Why Us"}
-    function create_if_block$2(ctx) {
+    function create_if_block$3(ctx) {
     	let whyus;
     	let current;
     	whyus = new WhyUs({ $$inline: true });
@@ -2703,7 +3224,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$2.name,
+    		id: create_if_block$3.name,
     		type: "if",
     		source: "(30:7) {#if currentTab===\\\"Why Us\\\"}",
     		ctx
@@ -2741,7 +3262,7 @@ var app = (function () {
     		});
 
     	tabs.$on("tabChange", /*handleTabChange*/ ctx[4]);
-    	const if_block_creators = [create_if_block$2, create_if_block_1$1, create_if_block_2$1, create_if_block_3];
+    	const if_block_creators = [create_if_block$3, create_if_block_1$1, create_if_block_2$1, create_if_block_3];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -3218,7 +3739,7 @@ var app = (function () {
     			i = element("i");
     			t = text(" Get Directions");
     			attr_dev(i, "class", "fas fa-directions");
-    			add_location(i, file$j, 14, 50, 1115);
+    			add_location(i, file$j, 14, 50, 1129);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -3297,29 +3818,30 @@ var app = (function () {
     			a = element("a");
     			create_component(button.$$.fragment);
     			attr_dev(h2, "class", "font-dispalay text-2xl p-3");
-    			add_location(h2, file$j, 5, 4, 129);
-    			add_location(br0, file$j, 8, 51, 279);
-    			add_location(br1, file$j, 8, 76, 304);
-    			add_location(br2, file$j, 8, 116, 344);
+    			add_location(h2, file$j, 5, 4, 143);
+    			add_location(br0, file$j, 8, 51, 293);
+    			add_location(br1, file$j, 8, 76, 318);
+    			add_location(br2, file$j, 8, 116, 358);
     			attr_dev(p, "class", " font-body");
-    			add_location(p, file$j, 8, 12, 240);
+    			add_location(p, file$j, 8, 12, 254);
     			attr_dev(div0, "class", "");
-    			add_location(div0, file$j, 7, 8, 213);
+    			add_location(div0, file$j, 7, 8, 227);
     			attr_dev(iframe, "title", "googleMapLocation");
     			if (iframe.src !== (iframe_src_value = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3931.131821581477!2d77.1519759152507!3d9.839294292961469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07a733ff04eeed%3A0x44c8ee5f5fbf504d!2sDr.%20Sunil's%20IELTS%20CENTER!5e0!3m2!1sen!2sin!4v1621527851572!5m2!1sen!2sin")) attr_dev(iframe, "src", iframe_src_value);
     			set_style(iframe, "border", "0");
     			iframe.allowFullscreen = "";
     			attr_dev(iframe, "loading", "lazy");
     			attr_dev(iframe, "class", "w-full h-64 p-3 bg-blue-50");
-    			add_location(iframe, file$j, 12, 12, 437);
+    			add_location(iframe, file$j, 12, 12, 451);
     			attr_dev(a, "target", "_blank");
     			attr_dev(a, "href", "https://www.google.com/maps/dir//Dr.+Sunil%27s+IELTS+CENTER/data=!4m8!4m7!1m0!1m5!1m1!1s0x3b07a733ff04eeed:0x44c8ee5f5fbf504d!2m2!1d77.1541646!2d9.839294299999999");
-    			add_location(a, file$j, 13, 12, 874);
+    			add_location(a, file$j, 13, 12, 888);
     			attr_dev(div1, "class", "w-full ");
-    			add_location(div1, file$j, 11, 8, 403);
+    			add_location(div1, file$j, 11, 8, 417);
     			attr_dev(div2, "class", "");
-    			add_location(div2, file$j, 6, 4, 190);
+    			add_location(div2, file$j, 6, 4, 204);
     			attr_dev(div3, "class", "bg-white p-5 w-full rounded w-86 md:w-110");
+    			attr_dev(div3, "id", "#Address");
     			add_location(div3, file$j, 4, 0, 69);
     		},
     		l: function claim(nodes) {
@@ -3434,13 +3956,13 @@ var app = (function () {
     			p = element("p");
     			t1 = text(/*subtext*/ ctx[1]);
     			attr_dev(i, "class", i_class_value = "fas fa-" + /*icon*/ ctx[0]);
-    			add_location(i, file$i, 9, 12, 239);
+    			add_location(i, file$i, 10, 12, 241);
     			attr_dev(div0, "class", "text-xl text-white");
-    			add_location(div0, file$i, 8, 8, 194);
+    			add_location(div0, file$i, 9, 8, 196);
     			attr_dev(p, "class", "font-body text-white font-bold");
-    			add_location(p, file$i, 11, 8, 292);
+    			add_location(p, file$i, 12, 8, 294);
     			attr_dev(div1, "class", div1_class_value = "p-5 m-3 inline-block rounded-xl " + (/*selected*/ ctx[2] ? "bg-red-400" : "") + " cursor-pointer");
-    			add_location(div1, file$i, 7, 4, 89);
+    			add_location(div1, file$i, 8, 4, 90);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3864,47 +4386,48 @@ var app = (function () {
     			button1 = element("button");
     			create_component(button0.$$.fragment);
     			attr_dev(h2, "class", "font-dispalay text-2xl p-3");
-    			add_location(h2, file$g, 5, 4, 129);
+    			add_location(h2, file$g, 5, 4, 143);
     			attr_dev(label0, "for", "Name");
     			attr_dev(label0, "class", "text-left");
-    			add_location(label0, file$g, 9, 16, 370);
+    			add_location(label0, file$g, 9, 16, 384);
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "class", "ring-2 ring-blue-200 p-2 my-3 w-full rounded outline-none focus:ring-2 focus:ring-red-300");
-    			add_location(input0, file$g, 10, 16, 436);
+    			add_location(input0, file$g, 10, 16, 450);
     			attr_dev(label1, "for", "Email");
     			attr_dev(label1, "class", "text-left");
-    			add_location(label1, file$g, 11, 16, 570);
+    			add_location(label1, file$g, 11, 16, 584);
     			attr_dev(input1, "type", "email");
     			attr_dev(input1, "class", "ring-2 ring-blue-200 p-2 my-3 w-full rounded outline-none focus:ring-2 focus:ring-red-300");
-    			add_location(input1, file$g, 12, 16, 637);
+    			add_location(input1, file$g, 12, 16, 651);
     			attr_dev(label2, "for", "Phone");
     			attr_dev(label2, "class", "text-left");
-    			add_location(label2, file$g, 13, 16, 772);
+    			add_location(label2, file$g, 13, 16, 786);
     			attr_dev(input2, "type", "tel");
     			attr_dev(input2, "pattern", "[0-9]" + 10);
     			attr_dev(input2, "class", "ring-2 ring-blue-200 p-2 my-3 w-full rounded outline-none focus:ring-2 focus:ring-red-300");
-    			add_location(input2, file$g, 14, 16, 839);
+    			add_location(input2, file$g, 14, 16, 853);
     			attr_dev(div0, "class", "flex flex-col w-full md:w-max");
-    			add_location(div0, file$g, 8, 12, 310);
+    			add_location(div0, file$g, 8, 12, 324);
     			attr_dev(label3, "for", "Message");
     			attr_dev(label3, "class", "text-left block");
-    			add_location(label3, file$g, 17, 16, 1054);
+    			add_location(label3, file$g, 17, 16, 1068);
     			attr_dev(textarea, "name", "Message");
     			attr_dev(textarea, "id", "Message");
     			attr_dev(textarea, "cols", "30");
     			attr_dev(textarea, "rows", "10");
     			attr_dev(textarea, "class", "w-full bg-blue-100 focus:ring-2 focus:ring-red-300  p-2 my-3 rounded outline-none");
-    			add_location(textarea, file$g, 18, 16, 1131);
+    			add_location(textarea, file$g, 18, 16, 1145);
     			attr_dev(div1, "class", "w-full md:w-max");
-    			add_location(div1, file$g, 16, 12, 1008);
+    			add_location(div1, file$g, 16, 12, 1022);
     			attr_dev(div2, "class", "flex flex-col md:flex-row flex-wrap justify-evenly items-center w-full");
-    			add_location(div2, file$g, 7, 8, 213);
-    			add_location(button1, file$g, 22, 12, 1371);
+    			add_location(div2, file$g, 7, 8, 227);
+    			add_location(button1, file$g, 22, 12, 1385);
     			attr_dev(div3, "class", "text-center");
-    			add_location(div3, file$g, 21, 8, 1333);
+    			add_location(div3, file$g, 21, 8, 1347);
     			attr_dev(form, "class", "");
-    			add_location(form, file$g, 6, 4, 189);
+    			add_location(form, file$g, 6, 4, 203);
     			attr_dev(div4, "class", "bg-white p-5 w-full rounded w-86 md:w-110");
+    			attr_dev(div4, "id", "#Message");
     			add_location(div4, file$g, 4, 0, 69);
     		},
     		l: function claim(nodes) {
@@ -4054,35 +4577,36 @@ var app = (function () {
     			div2 = element("div");
     			i2 = element("i");
     			attr_dev(h2, "class", "font-dispalay text-2xl p-3");
-    			add_location(h2, file$f, 1, 4, 60);
-    			add_location(h3, file$f, 3, 8, 147);
+    			add_location(h2, file$f, 1, 4, 72);
+    			add_location(h3, file$f, 3, 8, 159);
     			attr_dev(i0, "class", "fas fa-phone-alt  text-white");
-    			add_location(i0, file$f, 5, 149, 349);
+    			add_location(i0, file$f, 5, 149, 361);
     			attr_dev(div0, "class", "bg-blue-400  text-white hover:bg-blue-500 inline-block p-2");
-    			add_location(div0, file$f, 5, 77, 277);
+    			add_location(div0, file$f, 5, 77, 289);
     			attr_dev(a0, "class", "font-bold ");
     			attr_dev(a0, "href", "tel:+91-97444-12045");
-    			add_location(a0, file$f, 5, 12, 212);
+    			add_location(a0, file$f, 5, 12, 224);
     			attr_dev(i1, "class", "fab fa-whatsapp  text-white");
-    			add_location(i1, file$f, 6, 104, 509);
+    			add_location(i1, file$f, 6, 104, 521);
     			attr_dev(div1, "class", "bg-blue-400  text-white hover:bg-blue-500 inline-block p-2");
-    			add_location(div1, file$f, 6, 32, 437);
+    			add_location(div1, file$f, 6, 32, 449);
     			attr_dev(a1, "href", "#whatsapp");
-    			add_location(a1, file$f, 6, 12, 417);
+    			add_location(a1, file$f, 6, 12, 429);
     			attr_dev(p0, "class", "p-2");
-    			add_location(p0, file$f, 4, 8, 184);
+    			add_location(p0, file$f, 4, 8, 196);
     			attr_dev(i2, "class", "fas fa-phone-alt  text-white");
-    			add_location(i2, file$f, 10, 146, 758);
+    			add_location(i2, file$f, 10, 146, 770);
     			attr_dev(div2, "class", "bg-red-400  text-white hover:bg-red-500 inline-block p-2");
-    			add_location(div2, file$f, 10, 76, 688);
+    			add_location(div2, file$f, 10, 76, 700);
     			attr_dev(a2, "class", "font-bold ");
     			attr_dev(a2, "href", "tel:+91-9446129722");
-    			add_location(a2, file$f, 10, 12, 624);
+    			add_location(a2, file$f, 10, 12, 636);
     			attr_dev(p1, "class", "p-2");
-    			add_location(p1, file$f, 9, 8, 596);
+    			add_location(p1, file$f, 9, 8, 608);
     			attr_dev(div3, "class", "");
-    			add_location(div3, file$f, 2, 4, 124);
+    			add_location(div3, file$f, 2, 4, 136);
     			attr_dev(div4, "class", "bg-white p-5 w-full rounded w-86 md:w-110");
+    			attr_dev(div4, "id", "#Phone");
     			add_location(div4, file$f, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -4159,7 +4683,7 @@ var app = (function () {
     /* src/components/contactus/ContactUs.svelte generated by Svelte v3.38.2 */
     const file$e = "src/components/contactus/ContactUs.svelte";
 
-    // (14:4) <LargeHeading black={false}>
+    // (15:4) <LargeHeading black={false}>
     function create_default_slot$5(ctx) {
     	let h2;
 
@@ -4168,7 +4692,7 @@ var app = (function () {
     			h2 = element("h2");
     			h2.textContent = "Get In Touch";
     			attr_dev(h2, "class", "font-bold");
-    			add_location(h2, file$e, 13, 32, 516);
+    			add_location(h2, file$e, 14, 32, 517);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -4182,14 +4706,14 @@ var app = (function () {
     		block,
     		id: create_default_slot$5.name,
     		type: "slot",
-    		source: "(14:4) <LargeHeading black={false}>",
+    		source: "(15:4) <LargeHeading black={false}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (25:41) 
+    // (27:42) 
     function create_if_block_2(ctx) {
     	let addresstab;
     	let current;
@@ -4221,14 +4745,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(25:41) ",
+    		source: "(27:42) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (23:39) 
+    // (25:40) 
     function create_if_block_1(ctx) {
     	let phonetab;
     	let current;
@@ -4260,15 +4784,15 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(23:39) ",
+    		source: "(25:40) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (21:7) {#if currentItem==="Message"}
-    function create_if_block$1(ctx) {
+    // (23:8) {#if currentItem==="Message"}
+    function create_if_block$2(ctx) {
     	let messagetab;
     	let current;
     	messagetab = new MessageTab({ $$inline: true });
@@ -4297,9 +4821,9 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$1.name,
+    		id: create_if_block$2.name,
     		type: "if",
-    		source: "(21:7) {#if currentItem===\\\"Message\\\"}",
+    		source: "(23:8) {#if currentItem===\\\"Message\\\"}",
     		ctx
     	});
 
@@ -4310,14 +4834,15 @@ var app = (function () {
     	let section;
     	let largeheading;
     	let t0;
-    	let div2;
+    	let div3;
     	let div0;
     	let img;
     	let img_src_value;
     	let t1;
-    	let div1;
+    	let div2;
     	let contactswitcher;
     	let t2;
+    	let div1;
     	let current_block_type_index;
     	let if_block;
     	let current;
@@ -4337,7 +4862,7 @@ var app = (function () {
     		});
 
     	contactswitcher.$on("TabChange", /*handleTabChange*/ ctx[1]);
-    	const if_block_creators = [create_if_block$1, create_if_block_1, create_if_block_2];
+    	const if_block_creators = [create_if_block$2, create_if_block_1, create_if_block_2];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -4356,26 +4881,29 @@ var app = (function () {
     			section = element("section");
     			create_component(largeheading.$$.fragment);
     			t0 = space();
-    			div2 = element("div");
+    			div3 = element("div");
     			div0 = element("div");
     			img = element("img");
     			t1 = space();
-    			div1 = element("div");
+    			div2 = element("div");
     			create_component(contactswitcher.$$.fragment);
     			t2 = space();
+    			div1 = element("div");
     			if (if_block) if_block.c();
     			if (img.src !== (img_src_value = "/img/bro.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "contact Us illlustration");
-    			add_location(img, file$e, 16, 8, 669);
+    			add_location(img, file$e, 17, 8, 673);
     			attr_dev(div0, "class", "hidden md:block");
-    			add_location(div0, file$e, 15, 4, 631);
-    			attr_dev(div1, "class", "flex flex-col justify-center items-center");
-    			add_location(div1, file$e, 18, 4, 740);
-    			attr_dev(div2, "class", "flex items-center justify-around py-24");
-    			add_location(div2, file$e, 14, 3, 574);
+    			add_location(div0, file$e, 16, 4, 635);
+    			attr_dev(div1, "class", "");
+    			add_location(div1, file$e, 21, 7, 891);
+    			attr_dev(div2, "class", "flex flex-col justify-center items-center");
+    			add_location(div2, file$e, 19, 4, 744);
+    			attr_dev(div3, "class", "flex items-center justify-around md:py-24");
+    			add_location(div3, file$e, 15, 3, 575);
     			attr_dev(section, "id", "ContactUs");
     			attr_dev(section, "class", "flex flex-col justify-center items-center p-5 text-center  bg-pink-600 w-screen overflow-hidden");
-    			add_location(section, file$e, 12, 0, 355);
+    			add_location(section, file$e, 13, 0, 356);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4384,13 +4912,14 @@ var app = (function () {
     			insert_dev(target, section, anchor);
     			mount_component(largeheading, section, null);
     			append_dev(section, t0);
-    			append_dev(section, div2);
-    			append_dev(div2, div0);
+    			append_dev(section, div3);
+    			append_dev(div3, div0);
     			append_dev(div0, img);
-    			append_dev(div2, t1);
+    			append_dev(div3, t1);
+    			append_dev(div3, div2);
+    			mount_component(contactswitcher, div2, null);
+    			append_dev(div2, t2);
     			append_dev(div2, div1);
-    			mount_component(contactswitcher, div1, null);
-    			append_dev(div1, t2);
 
     			if (~current_block_type_index) {
     				if_blocks[current_block_type_index].m(div1, null);
@@ -5130,7 +5659,7 @@ var app = (function () {
     			div5 = element("div");
     			h32 = element("h3");
     			h32.textContent = "Staturdays and sundays are holidays for both online and offline classes";
-    			attr_dev(div0, "class", "flex flex-col md:flex-row justify-center items-center text-center py-24");
+    			attr_dev(div0, "class", "flex flex-col md:flex-row justify-center items-center text-center py-16");
     			add_location(div0, file$b, 9, 0, 255);
     			attr_dev(h30, "class", "p-2 font-Display font-bold");
     			add_location(h30, file$b, 22, 8, 1121);
@@ -5415,10 +5944,11 @@ var app = (function () {
     			t0 = space();
     			h3 = element("h3");
     			h3.textContent = "Edustar Fastrack";
-    			if (img.src !== (img_src_value = "")) attr_dev(img, "src", img_src_value);
+    			if (img.src !== (img_src_value = "/img/logoRed.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Edustar Fastrack Logo");
+    			attr_dev(img, "class", "w-36");
     			add_location(img, file$9, 1, 4, 35);
-    			add_location(h3, file$9, 2, 4, 80);
+    			add_location(h3, file$9, 2, 4, 110);
     			attr_dev(div, "class", "inline-block p-5");
     			add_location(div, file$9, 0, 0, 0);
     		},
@@ -5477,21 +6007,28 @@ var app = (function () {
     }
 
     /* src/shared/Navlinks.svelte generated by Svelte v3.38.2 */
-
     const file$8 = "src/shared/Navlinks.svelte";
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[1] = list[i];
+    	child_ctx[4] = list[i];
     	return child_ctx;
     }
 
-    // (13:4) {#each navlinks as navlink(navlink.id)}
-    function create_each_block$1(key_1, ctx) {
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[4] = list[i];
+    	return child_ctx;
+    }
+
+    // (24:8) {#each navlinks as navlink(navlink.id)}
+    function create_each_block_1(key_1, ctx) {
     	let li;
     	let a;
-    	let t_value = /*navlink*/ ctx[1].name + "";
+    	let t_value = /*navlink*/ ctx[4].name + "";
     	let t;
+    	let mounted;
+    	let dispose;
 
     	const block = {
     		key: key_1,
@@ -5500,45 +6037,56 @@ var app = (function () {
     			li = element("li");
     			a = element("a");
     			t = text(t_value);
-    			attr_dev(a, "href", /*navlink*/ ctx[1].section);
+    			attr_dev(a, "href", /*navlink*/ ctx[4].section);
     			attr_dev(a, "class", "hover:text-purple-700 no-underline");
-    			add_location(a, file$8, 13, 28, 447);
+    			add_location(a, file$8, 24, 32, 775);
     			attr_dev(li, "class", "p-5 text-xl");
-    			add_location(li, file$8, 13, 4, 423);
+    			add_location(li, file$8, 24, 8, 751);
     			this.first = li;
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
     			append_dev(li, a);
     			append_dev(a, t);
+
+    			if (!mounted) {
+    				dispose = action_destroyer(scrollto.call(null, a, /*navlink*/ ctx[4].section));
+    				mounted = true;
+    			}
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(li);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$1.name,
+    		id: create_each_block_1.name,
     		type: "each",
-    		source: "(13:4) {#each navlinks as navlink(navlink.id)}",
+    		source: "(24:8) {#each navlinks as navlink(navlink.id)}",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$8(ctx) {
+    // (29:4) {#if mobileNav}
+    function create_if_block$1(ctx) {
     	let nav;
     	let ul;
     	let each_blocks = [];
     	let each_1_lookup = new Map();
-    	let each_value = /*navlinks*/ ctx[0];
+    	let nav_class_value;
+    	let nav_transition;
+    	let current;
+    	let each_value = /*navlinks*/ ctx[1];
     	validate_each_argument(each_value);
-    	const get_key = ctx => /*navlink*/ ctx[1].id;
+    	const get_key = ctx => /*navlink*/ ctx[4].id;
     	validate_each_keys(ctx, each_value, get_each_context$1, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -5556,13 +6104,14 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(ul, "class", "flex flex-col md:flex-row");
-    			add_location(ul, file$8, 11, 4, 336);
-    			attr_dev(nav, "class", "md:inline-block hidden ");
-    			add_location(nav, file$8, 10, 0, 294);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    			attr_dev(ul, "class", "flex flex-col md:flex-row justify-center items-center");
+    			add_location(ul, file$8, 30, 8, 1069);
+
+    			attr_dev(nav, "class", nav_class_value = /*mobileNav*/ ctx[0]
+    			? "fixed block left-0 w-full bg-purple-100"
+    			: "hidden");
+
+    			add_location(nav, file$8, 29, 4, 967);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, nav, anchor);
@@ -5571,23 +6120,244 @@ var app = (function () {
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(ul, null);
     			}
+
+    			current = true;
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*navlinks*/ 1) {
-    				each_value = /*navlinks*/ ctx[0];
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*navlinks, mobileNav*/ 3) {
+    				each_value = /*navlinks*/ ctx[1];
     				validate_each_argument(each_value);
     				validate_each_keys(ctx, each_value, get_each_context$1, get_key);
     				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, ul, destroy_block, create_each_block$1, null, get_each_context$1);
     			}
+
+    			if (!current || dirty & /*mobileNav*/ 1 && nav_class_value !== (nav_class_value = /*mobileNav*/ ctx[0]
+    			? "fixed block left-0 w-full bg-purple-100"
+    			: "hidden")) {
+    				attr_dev(nav, "class", nav_class_value);
+    			}
     		},
-    		i: noop,
-    		o: noop,
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!nav_transition) nav_transition = create_bidirectional_transition(nav, slide, {}, true);
+    				nav_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!nav_transition) nav_transition = create_bidirectional_transition(nav, slide, {}, false);
+    			nav_transition.run(0);
+    			current = false;
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(nav);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].d();
     			}
+
+    			if (detaching && nav_transition) nav_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(29:4) {#if mobileNav}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (32:8) {#each navlinks as navlink(navlink.id)}
+    function create_each_block$1(key_1, ctx) {
+    	let li;
+    	let a;
+    	let t_value = /*navlink*/ ctx[4].name + "";
+    	let t;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			li = element("li");
+    			a = element("a");
+    			t = text(t_value);
+    			attr_dev(a, "href", /*navlink*/ ctx[4].section);
+    			attr_dev(a, "class", "hover:text-purple-700 no-underline");
+    			add_location(a, file$8, 32, 32, 1216);
+    			attr_dev(li, "class", "p-5 text-xl");
+    			add_location(li, file$8, 32, 8, 1192);
+    			this.first = li;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, li, anchor);
+    			append_dev(li, a);
+    			append_dev(a, t);
+
+    			if (!mounted) {
+    				dispose = [
+    					action_destroyer(scrollto.call(null, a, /*navlink*/ ctx[4].section)),
+    					listen_dev(a, "click", /*click_handler_1*/ ctx[3], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(li);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(32:8) {#each navlinks as navlink(navlink.id)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$8(ctx) {
+    	let div1;
+    	let div0;
+    	let span;
+    	let t0;
+    	let nav;
+    	let ul;
+    	let each_blocks = [];
+    	let each_1_lookup = new Map();
+    	let t1;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let each_value_1 = /*navlinks*/ ctx[1];
+    	validate_each_argument(each_value_1);
+    	const get_key = ctx => /*navlink*/ ctx[4].id;
+    	validate_each_keys(ctx, each_value_1, get_each_context_1, get_key);
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		let child_ctx = get_each_context_1(ctx, each_value_1, i);
+    		let key = get_key(child_ctx);
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block_1(key, child_ctx));
+    	}
+
+    	let if_block = /*mobileNav*/ ctx[0] && create_if_block$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			span = element("span");
+    			t0 = space();
+    			nav = element("nav");
+    			ul = element("ul");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t1 = space();
+    			if (if_block) if_block.c();
+    			attr_dev(span, "class", "fas fa-bars text-2xl");
+    			add_location(span, file$8, 19, 4, 557);
+    			attr_dev(div0, "class", "inline-block md:hidden p-5 mt-3 hover:text-blue-600");
+    			add_location(div0, file$8, 15, 0, 439);
+    			attr_dev(ul, "class", "flex flex-col md:flex-row");
+    			add_location(ul, file$8, 22, 8, 656);
+    			attr_dev(nav, "class", "md:inline-block hidden");
+    			add_location(nav, file$8, 21, 4, 611);
+    			attr_dev(div1, "class", "inline-block mt-5");
+    			add_location(div1, file$8, 14, 0, 407);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, span);
+    			append_dev(div1, t0);
+    			append_dev(div1, nav);
+    			append_dev(nav, ul);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(ul, null);
+    			}
+
+    			append_dev(div1, t1);
+    			if (if_block) if_block.m(div1, null);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(div0, "click", /*click_handler*/ ctx[2], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*navlinks*/ 2) {
+    				each_value_1 = /*navlinks*/ ctx[1];
+    				validate_each_argument(each_value_1);
+    				validate_each_keys(ctx, each_value_1, get_each_context_1, get_key);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value_1, each_1_lookup, ul, destroy_block, create_each_block_1, null, get_each_context_1);
+    			}
+
+    			if (/*mobileNav*/ ctx[0]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*mobileNav*/ 1) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$1(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div1, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+
+    			if (if_block) if_block.d();
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -5603,6 +6373,7 @@ var app = (function () {
     }
 
     function instance$8($$self, $$props, $$invalidate) {
+    	let mobileNav;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Navlinks", slots, []);
 
@@ -5636,17 +6407,27 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Navlinks> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ navlinks });
+    	const click_handler = () => {
+    		$$invalidate(0, mobileNav = !mobileNav);
+    	};
+
+    	const click_handler_1 = () => {
+    		$$invalidate(0, mobileNav = !mobileNav);
+    	};
+
+    	$$self.$capture_state = () => ({ scrollto, slide, navlinks, mobileNav });
 
     	$$self.$inject_state = $$props => {
-    		if ("navlinks" in $$props) $$invalidate(0, navlinks = $$props.navlinks);
+    		if ("navlinks" in $$props) $$invalidate(1, navlinks = $$props.navlinks);
+    		if ("mobileNav" in $$props) $$invalidate(0, mobileNav = $$props.mobileNav);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [navlinks];
+    	$$invalidate(0, mobileNav = false);
+    	return [mobileNav, navlinks, click_handler, click_handler_1];
     }
 
     class Navlinks extends SvelteComponentDev {
@@ -5674,6 +6455,7 @@ var app = (function () {
     	let i;
     	let t0;
     	let div1;
+    	let a;
     	let t2;
     	let div3;
     	let branding;
@@ -5692,25 +6474,28 @@ var app = (function () {
     			i = element("i");
     			t0 = space();
     			div1 = element("div");
-    			div1.textContent = "+91 12345667890";
+    			a = element("a");
+    			a.textContent = "+91 9744412045";
     			t2 = space();
     			div3 = element("div");
     			create_component(branding.$$.fragment);
     			t3 = space();
     			create_component(navlinks.$$.fragment);
-    			attr_dev(i, "class", "fas fa-phone ");
-    			add_location(i, file$7, 8, 48, 297);
-    			attr_dev(div0, "class", "inline bg-blue-500 p-3");
-    			add_location(div0, file$7, 8, 11, 260);
-    			attr_dev(div1, "class", "inline-block p-2");
-    			add_location(div1, file$7, 9, 12, 345);
-    			attr_dev(h3, "class", "bg-red-500 inline-block text-white m-2");
-    			add_location(h3, file$7, 7, 8, 197);
+    			attr_dev(i, "class", "fas fa-phone");
+    			add_location(i, file$7, 8, 66, 332);
+    			attr_dev(div0, "class", "inline bg-blue-500 p-3 text-sm md:text-xl");
+    			add_location(div0, file$7, 8, 11, 277);
+    			attr_dev(a, "href", "tel:+91-97444-12045");
+    			add_location(a, file$7, 9, 61, 428);
+    			attr_dev(div1, "class", "inline-block p-2 text-sm md:text-xl");
+    			add_location(div1, file$7, 9, 12, 379);
+    			attr_dev(h3, "class", "bg-red-500 inline-block text-white m-1 absolute");
+    			add_location(h3, file$7, 7, 8, 205);
     			attr_dev(div2, "class", "flex justify-end");
-    			add_location(div2, file$7, 6, 4, 158);
-    			attr_dev(div3, "class", "flex flex-col md:flex-row items-center md:justify-between ");
-    			add_location(div3, file$7, 12, 4, 427);
-    			attr_dev(div4, "class", "fixed w-full bg-purple-100 z-10");
+    			add_location(div2, file$7, 6, 4, 166);
+    			attr_dev(div3, "class", "flex flex-row items-center justify-between");
+    			add_location(div3, file$7, 12, 4, 512);
+    			attr_dev(div4, "class", "fixed w-full md:px-5 bg-purple-100 z-10");
     			add_location(div4, file$7, 5, 0, 108);
     		},
     		l: function claim(nodes) {
@@ -5724,6 +6509,7 @@ var app = (function () {
     			append_dev(div0, i);
     			append_dev(h3, t0);
     			append_dev(h3, div1);
+    			append_dev(div1, a);
     			append_dev(div4, t2);
     			append_dev(div4, div3);
     			mount_component(branding, div3, null);
@@ -6044,7 +6830,7 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut temporibus recusandae, incidunt mollitia qui quos obcaecati cumque. Maiores, reprehenderit provident?";
     			attr_dev(p, "class", "w-3/4 md:w-2/3 hidden md:block");
-    			add_location(p, file$5, 15, 8, 602);
+    			add_location(p, file$5, 15, 8, 641);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -6108,6 +6894,8 @@ var app = (function () {
     	let t5;
     	let heroimgs1;
     	let current;
+    	let mounted;
+    	let dispose;
 
     	largeheading = new LargeHeading({
     			props: {
@@ -6156,13 +6944,13 @@ var app = (function () {
     			t5 = space();
     			create_component(heroimgs1.$$.fragment);
     			attr_dev(h1, "class", "text-4xl md:text-5xl lg:text-6xl p-5 font-Display");
-    			add_location(h1, file$5, 11, 4, 442);
+    			add_location(h1, file$5, 11, 4, 481);
     			attr_dev(a, "href", "#ContactUs");
-    			add_location(a, file$5, 17, 0, 826);
+    			add_location(a, file$5, 17, 0, 865);
     			attr_dev(div0, "class", "md:w-1/2");
-    			add_location(div0, file$5, 9, 4, 362);
+    			add_location(div0, file$5, 9, 4, 401);
     			attr_dev(div1, "class", "text-center flex flex-col justify-center items-center h-full py-48 pt-56 md:pb-36 mb-48 md:mb-0 relative");
-    			add_location(div1, file$5, 8, 0, 239);
+    			add_location(div1, file$5, 8, 0, 278);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6183,6 +6971,11 @@ var app = (function () {
     			append_dev(div0, t5);
     			mount_component(heroimgs1, div0, null);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = action_destroyer(scrollto.call(null, a, "#ContactUs"));
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
     			const largeheading_changes = {};
@@ -6231,6 +7024,8 @@ var app = (function () {
     			destroy_component(button);
     			destroy_component(heroimgs0);
     			destroy_component(heroimgs1);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -6254,7 +7049,14 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<HeroSection> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ Button, LargeHeading, Subtext, HeroImgs });
+    	$$self.$capture_state = () => ({
+    		Button,
+    		LargeHeading,
+    		Subtext,
+    		HeroImgs,
+    		scrollto
+    	});
+
     	return [];
     }
 
@@ -6812,11 +7614,11 @@ var app = (function () {
     			h2 = element("h2");
     			h2.textContent = "What People are Saying about Edustar?";
     			attr_dev(i, "class", "fas fa-quote-left absolute text-gray-300 text-6xl");
-    			add_location(i, file$1, 107, 37, 2892);
+    			add_location(i, file$1, 107, 37, 2860);
     			attr_dev(h2, "class", "text-left relative pt-10 pl-3");
-    			add_location(h2, file$1, 107, 102, 2957);
+    			add_location(h2, file$1, 107, 102, 2925);
     			attr_dev(div, "class", "");
-    			add_location(div, file$1, 107, 23, 2878);
+    			add_location(div, file$1, 107, 23, 2846);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -6839,7 +7641,7 @@ var app = (function () {
     	return block;
     }
 
-    // (114:8) <TestmContent Testimonial={Testimonial}>
+    // (116:8) <TestmContent Testimonial={Testimonial}>
     function create_default_slot(ctx) {
     	let t_value = /*Testimonial*/ ctx[9].content + "";
     	let t;
@@ -6863,14 +7665,14 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(114:8) <TestmContent Testimonial={Testimonial}>",
+    		source: "(116:8) <TestmContent Testimonial={Testimonial}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (113:8) {#each viewArray as Testimonial(Testimonial.id)}
+    // (115:8) {#each viewArray as Testimonial(Testimonial.id)}
     function create_each_block(key_1, ctx) {
     	let first;
     	let testmcontent;
@@ -6928,7 +7730,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(113:8) {#each viewArray as Testimonial(Testimonial.id)}",
+    		source: "(115:8) {#each viewArray as Testimonial(Testimonial.id)}",
     		ctx
     	});
 
@@ -6937,14 +7739,15 @@ var app = (function () {
 
     function create_fragment$1(ctx) {
     	let section;
-    	let div3;
-    	let div0;
+    	let div4;
+    	let div1;
     	let largeheading;
     	let t0;
+    	let div0;
     	let testmnav;
     	let t1;
+    	let div3;
     	let div2;
-    	let div1;
     	let each_blocks = [];
     	let each_1_lookup = new Map();
     	let current;
@@ -6981,27 +7784,30 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			section = element("section");
-    			div3 = element("div");
-    			div0 = element("div");
+    			div4 = element("div");
+    			div1 = element("div");
     			create_component(largeheading.$$.fragment);
     			t0 = space();
+    			div0 = element("div");
     			create_component(testmnav.$$.fragment);
     			t1 = space();
+    			div3 = element("div");
     			div2 = element("div");
-    			div1 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "flex self-start  justify-between");
-    			add_location(div0, file$1, 106, 4, 2808);
-    			attr_dev(div1, "class", "flex flex-col md:flex-row justify-evenly items-center flex-wrap py-10");
-    			add_location(div1, file$1, 111, 4, 3245);
-    			attr_dev(div2, "class", "h-96 overflow-hidden");
-    			add_location(div2, file$1, 110, 0, 3206);
-    			attr_dev(div3, "class", "md:w-2/3");
-    			add_location(div3, file$1, 105, 3, 2781);
+    			attr_dev(div0, "class", "absolute right-3 inline-block");
+    			add_location(div0, file$1, 108, 8, 3040);
+    			attr_dev(div1, "class", "");
+    			add_location(div1, file$1, 106, 4, 2808);
+    			attr_dev(div2, "class", "flex flex-col md:flex-row justify-evenly items-center flex-wrap py-10");
+    			add_location(div2, file$1, 113, 4, 3284);
+    			attr_dev(div3, "class", "h-96 overflow-hidden");
+    			add_location(div3, file$1, 112, 0, 3245);
+    			attr_dev(div4, "class", "md:w-2/3");
+    			add_location(div4, file$1, 105, 3, 2781);
     			attr_dev(section, "id", "Testimonials");
     			attr_dev(section, "class", "p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden");
     			add_location(section, file$1, 104, 0, 2665);
@@ -7011,17 +7817,18 @@ var app = (function () {
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, section, anchor);
-    			append_dev(section, div3);
-    			append_dev(div3, div0);
-    			mount_component(largeheading, div0, null);
-    			append_dev(div0, t0);
+    			append_dev(section, div4);
+    			append_dev(div4, div1);
+    			mount_component(largeheading, div1, null);
+    			append_dev(div1, t0);
+    			append_dev(div1, div0);
     			mount_component(testmnav, div0, null);
-    			append_dev(div3, t1);
+    			append_dev(div4, t1);
+    			append_dev(div4, div3);
     			append_dev(div3, div2);
-    			append_dev(div2, div1);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(div1, null);
+    				each_blocks[i].m(div2, null);
     			}
 
     			current = true;
@@ -7043,7 +7850,7 @@ var app = (function () {
     				validate_each_argument(each_value);
     				group_outros();
     				validate_each_keys(ctx, each_value, get_each_context, get_key);
-    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div1, outro_and_destroy_block, create_each_block, null, get_each_context);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div2, outro_and_destroy_block, create_each_block, null, get_each_context);
     				check_outros();
     			}
     		},
@@ -7101,7 +7908,7 @@ var app = (function () {
     			name: "Melbin CM",
     			designation: "Engineer,Google,California",
     			content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, repudiandae.",
-    			img: "Melbin.jpg"
+    			img: "dummy.jpeg"
     		},
     		{
     			id: 2,
@@ -7109,7 +7916,7 @@ var app = (function () {
     			name: "Melbin CM",
     			designation: "Engineer,Google,California",
     			content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    			img: "Melbin.jpg"
+    			img: "dummy.jpeg"
     		},
     		{
     			id: 3,
@@ -7117,7 +7924,7 @@ var app = (function () {
     			name: "Melbin CM",
     			designation: "Engineer,Google,California",
     			content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    			img: "Melbin.jpg"
+    			img: "dummy.jpeg"
     		},
     		{
     			id: 4,
@@ -7125,7 +7932,7 @@ var app = (function () {
     			name: "Melbin CM",
     			designation: "Engineer,Google,California",
     			content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    			img: "Melbin.jpg"
+    			img: "dummy.jpeg"
     		},
     		{
     			id: 5,
@@ -7133,7 +7940,7 @@ var app = (function () {
     			name: "Melbin CM",
     			designation: "Engineer,Google,California",
     			content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    			img: "Melbin.jpg"
+    			img: "dummy.jpeg"
     		}
     	];
 

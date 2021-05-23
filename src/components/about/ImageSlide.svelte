@@ -30,7 +30,7 @@ let interval = setInterval(()=>{
 },3000);
 
 </script>  
-<div class="relative md:w-96 w-72 md:h-105 h-96 text-center " >
+<div class="relative md:w-96 w-72 md:h-105 h-96 text-center ring-2 " >
     
    {#each images as img}
    {#if img.id===currentImage}

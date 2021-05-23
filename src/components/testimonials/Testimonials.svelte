@@ -12,35 +12,35 @@ let Testimonials =[{
     name:"Melbin CM",
     designation:"Engineer,Google,California",
     content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, repudiandae.",
-    img:"Melbin.jpg"
+    img:"dummy.jpeg"
 },{
     id:2,
     title:"pwoli sanam m#$%#",
     name:"Melbin CM",
     designation:"Engineer,Google,California",
     content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"Melbin.jpg"
+    img:"dummy.jpeg"
 },{
     id:3,
     title:"stupendous",
     name:"Melbin CM",
     designation:"Engineer,Google,California",
     content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"Melbin.jpg"
+    img:"dummy.jpeg"
 },{
     id:4,
     title:"stupendous2",
     name:"Melbin CM",
     designation:"Engineer,Google,California",
     content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"Melbin.jpg"
+    img:"dummy.jpeg"
 },{
     id:5,
     title:"stupendous3",
     name:"Melbin CM",
     designation:"Engineer,Google,California",
     content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"Melbin.jpg"
+    img:"dummy.jpeg"
 }]
 
 let viewArray=[];
@@ -104,9 +104,11 @@ const handleLeftClick=()=>{
 
 <section id="Testimonials" class="p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden">
    <div class="md:w-2/3">
-    <div class="flex self-start  justify-between">
+    <div class="">
         <LargeHeading> <div class=""><i class="fas fa-quote-left absolute text-gray-300 text-6xl"></i><h2 class="text-left relative pt-10 pl-3">What People are Saying about Edustar?</h2></div> </LargeHeading>
-        <TestmNav currentItemNum={end} maxItems={maxItems} on:leftNavClick={handleLeftClick} on:rightNavClick={handleRightClick}/>
+        <div class="absolute right-3 inline-block">
+            <TestmNav currentItemNum={end} maxItems={maxItems} on:leftNavClick={handleLeftClick} on:rightNavClick={handleRightClick}/>
+        </div>
     </div>
 <div class="h-96 overflow-hidden">
     <div class="flex flex-col md:flex-row justify-evenly items-center flex-wrap py-10" >

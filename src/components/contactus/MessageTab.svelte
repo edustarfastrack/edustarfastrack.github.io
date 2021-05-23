@@ -2,7 +2,7 @@
 import Button from "../../shared/Button.svelte";
 
 </script>
-<div class="bg-white p-5 w-full rounded w-86 md:w-110">
+<div class="bg-white p-5 w-full rounded w-86 md:w-110" id="#Message">
     <h2 class="font-dispalay text-2xl p-3">Get a Quote</h2>
     <form class="">
         <div class="flex flex-col md:flex-row flex-wrap justify-evenly items-center w-full">
