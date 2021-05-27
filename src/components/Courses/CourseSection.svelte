@@ -8,13 +8,13 @@ import CourseCard from "./CourseCard.svelte";
 <section id="Courses" class="text-center mt-24 mb-16 w-screen overflow-hidden">
 <LargeHeading>Courses We Offer</LargeHeading>
 <div class="flex flex-col md:flex-row justify-center items-center text-center py-16">
-    <CourseCard cardTitle="Course1">
+    <CourseCard cardTitle="Spoken English">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sapiente molestiae nostrum veniam provident aliquam unde eveniet temporibus. Aliquid, fuga.
     </CourseCard>
-    <CourseCard cardTitle="Course2" redCard>
+    <CourseCard cardTitle="IELTS Coaching" redCard>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sapiente molestiae nostrum veniam provident aliquam unde eveniet temporibus. Aliquid, fuga.
     </CourseCard>
-    <CourseCard cardTitle="Course3">
+    <CourseCard cardTitle="Teachers Training">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sapiente molestiae nostrum veniam provident aliquam unde eveniet temporibus. Aliquid, fuga.
     </CourseCard>
 </div>

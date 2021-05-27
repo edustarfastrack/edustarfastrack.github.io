@@ -114,11 +114,11 @@ let minContent="";
         </div>
     </div>
 </div>
-<div class="h-105 overflow-hidden">
-    <div class="flex flex-col md:flex-row justify-evenly items-center flex-wrap py-10" >
+<div class="h-110 overflow-hidden">
+    <div class="flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10" >
         {#each viewArray as Testimonial(Testimonial.id)}
         
-        <TestmContent Testimonial={Testimonial} >{Testimonial.content.slice(0,200)}...</TestmContent>
+        <TestmContent Testimonial={Testimonial} >{Testimonial.content.slice(0,190)}...</TestmContent>
         
         {/each}
     </div>

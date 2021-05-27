@@ -6,6 +6,7 @@ import Footer from './components/footer/Footer.svelte';
 
 	import Header from './components/Header/Header.svelte';
 import Testimonials from './components/testimonials/Testimonials.svelte';
+import WhatsappButton from './components/WhatsappButton.svelte';
 
 	
 
@@ -17,6 +18,7 @@ import Testimonials from './components/testimonials/Testimonials.svelte';
 <AboutUs/>
 <Testimonials/>
 <ContactUs/>
+<WhatsappButton/>
 <Footer/>
 </main>
 

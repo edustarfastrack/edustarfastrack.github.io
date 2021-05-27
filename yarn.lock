@@ -1473,6 +1473,11 @@ supports-color@^8.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+svelte-forms@^1.1.51:
+  version "1.1.51"
+  resolved "https://registry.yarnpkg.com/svelte-forms/-/svelte-forms-1.1.51.tgz#b23b70173e08c232afe1dcb39fd0494eb1da610e"
+  integrity sha512-4SRwe0pJA9KvirkLAbi2uf4LWA3PoUS34bJkpqbgNFXERFVtSCbt9ZJ3Phu/bbRbYuQ6MptD7HuqsDZbCXd8Hw==
+
 svelte-intersection-observer@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/svelte-intersection-observer/-/svelte-intersection-observer-0.7.0.tgz#15a463ae63f47d60ffbdf7ba96056c24a9d67109"
