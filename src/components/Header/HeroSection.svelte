@@ -9,7 +9,7 @@ import { scrollto } from "svelte-scrollto";
 <div class="text-center flex flex-col justify-center items-center h-full py-48 pt-56 md:pb-36 mb-48 md:mb-0 relative">
     <div class="md:w-1/2">
     <LargeHeading>Edustar Nedumkandam</LargeHeading>
-    <h1 class="text-4xl md:text-5xl lg:text-6xl p-5 font-Display">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl p-5 font-Display font-bold">
         Fastrack your foriegn Dreams with edustar IELTS coaching
     </h1>
     <Subtext>

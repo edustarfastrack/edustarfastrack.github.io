@@ -2,45 +2,46 @@
 
 
 import LargeHeading from "../../shared/LargeHeading.svelte";
+import TestimonialModal from "./TestimonialModal.svelte";
 import TestmContent from "./TestmContent.svelte";
 import TestmNav from "./TestmNav.svelte";
 
 
 let Testimonials =[{
     id:1,
-    title:"Life changing course!",
-    name:"Melbin CM",
+    title:"Best IELTS training center one can find!",
+    name:"Angel Rose",
     designation:"Engineer,Google,California",
-    content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, repudiandae.",
-    img:"dummy.jpeg"
+    content:"Edustar is the best IELTS training center one can find. When I first joined I was nervous and not confident at all for attending the IELTS exam. But with just one month class, my standard of English along with my confidence increased to a great extend.My instructor Sunil sir was very friendly and professional. He always available for help and supported me to prepare better for my weakest sections and at the same time gave me valuable feedback on my performance based on the regular practice tests in the class. The advice I got really helped me face the test with more confidence and helped me to achieve my desired score of individual 7. Study material provided by Edustar was a very good resource for preparing for IELTS.All thanks to Sunil sir who was with me in every step of my way.I highly recommend Edustar Academy to all IELTS preparing candidates.",
+    img:"AngelRose.jpeg"
 },{
     id:2,
-    title:"pwoli sanam m#$%#",
-    name:"Melbin CM",
-    designation:"Engineer,Google,California",
-    content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"dummy.jpeg"
+    title:`Join “EDUSTAR”  if you really want to succeed in your life`,
+    name:"Neethumol John",
+    designation:"Canada",
+    content:`“To be honest, I was not proficient at all in English language when I started learning IELTS under Sunil sir supervision.I just want to say a massive thanks for your assistance to made me confident and achieve my dreams. I would say, to the least, You are my life saver and I don’t think I could be able to transform my life without you sir. I would recommend “EDUSTAR”  if you really want to succeed in your life.  Sunil sir is such a wonderful person who can guide, motivate and support you throughout your English learning journey.”`,
+    img:"Neethumol.jpeg"
 },{
     id:3,
-    title:"stupendous",
-    name:"Melbin CM",
+    title:"Massive THANK YOU to Sunil Sir",
+    name:"Linda Alias",
     designation:"Engineer,Google,California",
-    content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"dummy.jpeg"
+    content:"Massive THANK YOU to Sunil Sir for his help and support.Sir has been fantastic, his guidance and tailored approach was the key to my success! I would strongly recommend Edustar   Institute to everyone who gets stuck and cannot progress with IELTS.Thank you once again!",
+    img:"LindaAlias.jpeg"
 },{
     id:4,
-    title:"stupendous2",
-    name:"Melbin CM",
+    title:"My heartfelt thanks to EDUSTAR IELTS Academy",
+    name:"Geroge Kutty",
     designation:"Engineer,Google,California",
-    content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"dummy.jpeg"
+    content:"Dr.Sunil Sir , his way of teaching and giving attention to each student is nice.Practice makes man perfect, so this is also a place where practice gain, learnt many things during his classes.  It helps me to pin point my week areas/skills in English.He shared a lot of material to help improve our vocabulary. We were also given a lot of practice material and online practice sessions.He kept all the sessions interactive and constantly helped us improve in all aspects.Overall this is an excellent academy to recommend others. my heartfelt thanks to EDUSTAR IELTS Academy.",
+    img:"GeorgeKutty.jpg"
 },{
     id:5,
-    title:"stupendous3",
-    name:"Melbin CM",
+    title:"Extremely patient in helping me address the elusive aspects of the IELTS",
+    name:"Tom Thomas",
     designation:"Engineer,Google,California",
-    content:"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam officia cum excepturi nesciunt eum molestias!",
-    img:"dummy.jpeg"
+    content:"Dr. Sunil Devaprabha of EDU star (Idukki), was extremely patient in helping me address the elusive aspects of the IELTS, which were imperative to getting my required score . Regardless of the volume of students in the session, I always got personalized attention. It was the EDU Star  community's overall commitment that helped me achieve the band I wanted",
+    img:"TomThomas.jpeg"
 }]
 
 let viewArray=[];
@@ -100,6 +101,8 @@ const handleLeftClick=()=>{
          addViewItems(start,end);
      }
 }
+
+let minContent="";
 </script>
 
 <section id="Testimonials" class="p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden">
@@ -110,12 +113,15 @@ const handleLeftClick=()=>{
             <TestmNav currentItemNum={end} maxItems={maxItems} on:leftNavClick={handleLeftClick} on:rightNavClick={handleRightClick}/>
         </div>
     </div>
-<div class="h-96 overflow-hidden">
+</div>
+<div class="h-105 overflow-hidden">
     <div class="flex flex-col md:flex-row justify-evenly items-center flex-wrap py-10" >
         {#each viewArray as Testimonial(Testimonial.id)}
-        <TestmContent Testimonial={Testimonial}>{Testimonial.content}</TestmContent>
+        
+        <TestmContent Testimonial={Testimonial} >{Testimonial.content.slice(0,200)}...</TestmContent>
+        
         {/each}
     </div>
 </div>
-</div>
+
 </section>
