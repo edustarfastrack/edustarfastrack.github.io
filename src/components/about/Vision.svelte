@@ -1,4 +1,7 @@
-<div class="flex justify-center items-center">
+<script>
+    import { fade } from 'svelte/transition';
+</script>
+<div class="flex justify-center items-center" transition:fade|local>
     <div class="md:w-140 text-2xl  p-5  relative">
         <div class="flex justify-center items-center">
             <img src="/img/illustrations/Vision.svg" alt="" class="md:w-2/3">

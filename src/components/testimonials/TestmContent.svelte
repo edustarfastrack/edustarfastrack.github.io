@@ -2,7 +2,8 @@
 import Subtext from "../../shared/Subtext.svelte";
 import {fade,slide} from 'svelte/transition';
 import TestimonialModal from "./TestimonialModal.svelte";
-
+import { createEventDispatcher } from "svelte";
+let dispatch=createEventDispatcher();
 export let Testimonial;
 
 // ModalControl
@@ -10,10 +11,11 @@ $:openModal=false;
 const handleModalClick=()=>{
   
     openModal=true;
+    dispatch("modalOpen");
 }
 const handleModalClose=()=>{
-   
     openModal=false;
+    dispatch("modalClose");
 }
 </script>
 <div class="p-5 w-72 md:w-96"  transition:fade|local on:click={handleModalClick}>

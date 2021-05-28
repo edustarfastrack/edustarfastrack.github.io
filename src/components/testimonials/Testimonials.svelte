@@ -25,14 +25,14 @@ let Testimonials =[{
     id:3,
     title:"Massive THANK YOU to Sunil Sir",
     name:"Linda Alias",
-    designation:"Engineer,Google,California",
+    designation:"United Kingdom",
     content:"Massive THANK YOU to Sunil Sir for his help and support.Sir has been fantastic, his guidance and tailored approach was the key to my success! I would strongly recommend Edustar   Institute to everyone who gets stuck and cannot progress with IELTS.Thank you once again!",
     img:"LindaAlias.jpeg"
 },{
     id:4,
     title:"My heartfelt thanks to EDUSTAR IELTS Academy",
     name:"Geroge Kutty",
-    designation:"Engineer,Google,California",
+    designation:"Canada",
     content:"Dr.Sunil Sir , his way of teaching and giving attention to each student is nice.Practice makes man perfect, so this is also a place where practice gain, learnt many things during his classes.  It helps me to pin point my week areas/skills in English.He shared a lot of material to help improve our vocabulary. We were also given a lot of practice material and online practice sessions.He kept all the sessions interactive and constantly helped us improve in all aspects.Overall this is an excellent academy to recommend others. my heartfelt thanks to EDUSTAR IELTS Academy.",
     img:"GeorgeKutty.jpg"
 },{
@@ -101,8 +101,16 @@ const handleLeftClick=()=>{
          addViewItems(start,end);
      }
 }
-
-let minContent="";
+let interval
+const modalClose=()=>{
+    interval = setInterval(()=>{
+    handleRightClick();
+},5000);
+}
+modalClose();
+const modalOpen=()=>{
+clearInterval(interval);
+}
 </script>
 
 <section id="Testimonials" class="p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden">
@@ -118,7 +126,7 @@ let minContent="";
     <div class="flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10" >
         {#each viewArray as Testimonial(Testimonial.id)}
         
-        <TestmContent Testimonial={Testimonial} >{Testimonial.content.slice(0,190)}...</TestmContent>
+        <TestmContent Testimonial={Testimonial} on:modalOpen={modalOpen} on:modalClose={modalClose}>{Testimonial.content.slice(0,190)}...</TestmContent>
         
         {/each}
     </div>

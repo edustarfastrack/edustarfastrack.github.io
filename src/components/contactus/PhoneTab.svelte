@@ -4,7 +4,7 @@
         <h3>From 9AM to 7PM IST</h3>
         <p class="p-2">
             <a class="font-bold " href="tel:+91-97444-12045" >+91 9744412045 <div class="bg-blue-400  text-white hover:bg-blue-500 inline-block p-2"><i class="fas fa-phone-alt  text-white"></i></div> </a>
-            <a href="#whatsapp"><div class="bg-blue-400  text-white hover:bg-blue-500 inline-block p-2"><i class="fab fa-whatsapp  text-white"></i></div></a>
+            <a href="https://api.whatsapp.com/send?phone=919744412045&text="><div class="bg-blue-400  text-white hover:bg-blue-500 inline-block p-2"><i class="fab fa-whatsapp  text-white"></i></div></a>
            
         </p>
         <p class="p-2">
