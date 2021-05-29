@@ -52,13 +52,13 @@ $:intersecting?value.set(100):value.set(0);
       
                 
       
-            <div class=" md:text-left md:w-2/3">
+            <div class=" md:text-left md:w-2/3 md:order-1 order-2">
                 <h2 class="font-Display font-bold text-3xl p-2">100% Effective Learning Methods</h2>
                 <p class="p-2"> English speaking is compulsory in the institute .We always ensure that students get some new pieces of information everyday. In every module we have a structure that is unique. Getting together during the festival season is part of our time table. We also facilitate <strong>interaction between students and people from English speaking countries</strong> .  We ensure that <strong>individual attention</strong>  is given to all students. We always see to it that the latest study materials are given which helps the students in getting extra information and latest trends.We give students a <strong>test every week in the original IELTS format</strong>  that provides them an entire picture of how the exam is given and this removes the fear and prepares them to face the exam confidently. Generally, speaking is the toughest area for most non-English speaking students. Anticipating this problem, we give individual speeches everyday to exam–going students. We give extra listening in the morning every day. No doubt, this has helped students score satisfactorily in the listening module. 
                    <strong>VOA News and BBC news listening</strong> help students improve their speaking and understanding skills
                     </p>
             </div>
-            <div class="md:w-1/3 relative">
+            <div class="md:w-1/3 relative md:order-2 order-1">
                 <img src="/img/ClassRoom1.jpeg" alt="Dr.sunil Devaprabha" class="p-5 rounded-left">
             </div>
         </div>
