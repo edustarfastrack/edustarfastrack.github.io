@@ -1,4 +1,4 @@
-<div class="inline-block p-5">
-    <img src="/img/logoRed.png" alt="Edustar Fastrack Logo"  class="w-36">
-    <h3>Edustar Fastrack</h3>
+<div class="p-5 flex flex-col justify-center items-center">
+    <img src="/img/logo1.png" alt="Edustar Fastrack Logo"  class="w-20">
+    <h3 class="font-Display  text-yellow-600 text-xl font-bold p-2">EDUSTAR FASTRACK</h3>
 </div>

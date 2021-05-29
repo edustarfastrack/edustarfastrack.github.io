@@ -8,13 +8,13 @@ import CourseCard from "./CourseCard.svelte";
 <section id="Courses" class="text-center mt-24 mb-16 w-screen overflow-hidden">
 <LargeHeading>Courses We Offer</LargeHeading>
 <div class="flex flex-col md:flex-row justify-center items-center text-center py-16">
-    <CourseCard cardTitle="Spoken English">
+    <CourseCard cardTitle="Spoken English" order="md:order-1 order-2">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sapiente molestiae nostrum veniam provident aliquam unde eveniet temporibus. Aliquid, fuga.
     </CourseCard>
-    <CourseCard cardTitle="IELTS Coaching" redCard>
+    <CourseCard cardTitle="IELTS Coaching" redCard order="md:order-2 order-1">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sapiente molestiae nostrum veniam provident aliquam unde eveniet temporibus. Aliquid, fuga.
     </CourseCard>
-    <CourseCard cardTitle="Teachers Training">
+    <CourseCard cardTitle="Teachers Training" order="md:order-3 order-3">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sapiente molestiae nostrum veniam provident aliquam unde eveniet temporibus. Aliquid, fuga.
     </CourseCard>
 </div>
@@ -35,7 +35,7 @@ import CourseCard from "./CourseCard.svelte";
         </div>
     </div>
     <div class="">
-        <h3 class="font-bold text-red-700 p-2">Staturdays and sundays are holidays for both online and offline classes</h3>
+        <h3 class="font-bold text-red-700 p-2">Saturdays and Sundays are holidays for both online and offline classes</h3>
     </div>
 </div>
 </section>

@@ -45,7 +45,7 @@ $:intersecting?value.set(100):value.set(0);
       
             <div class=" md:text-right w-full md:w-2/3">
                 <h2 class="font-Display font-bold text-3xl p-2">Excellent Faculty</h2>
-                <p class="p-2"><strong>Sunil Devaprabha(Phd)</strong>  was a School teacher for 15 years turned British Council Trained Trainer and Success Coach.  An energetic Motivator, he has been sharing strategic skill, success tools and core values to the masses. He specializes in Positive Thinking and Peak Performance.  A passionate coach, he has trained and motivated over 30,000 students on Goal Setting, Energy, Rapport Building, Teachers Training, Parental Guidance, and Emotional Intelligence. </p>
+                <p class="p-2"><strong>Sunil Devaprabha(PhD)</strong>  was a School teacher for 15 years turned British Council Trained Trainer and Success Coach.  An energetic Motivator, he has been sharing strategic skill, success tools and core values to the masses. He specializes in Positive Thinking and Peak Performance.  A passionate coach, he has trained and motivated over 30,000 students on Goal Setting, Energy, Rapport Building, Teachers Training, Parental Guidance, and Emotional Intelligence. With 18years of teaching experience; 2004 onward he has started his career as a resource person for teachers and conducted more than 150 sessions across the state (Kerala) alone.</p>
             </div>
         </div>
         <div class="flex flex-col md:flex-row justify-between p-5 m-2 my-5 items-center flex-wrap">
@@ -54,7 +54,9 @@ $:intersecting?value.set(100):value.set(0);
       
             <div class=" md:text-left md:w-2/3">
                 <h2 class="font-Display font-bold text-3xl p-2">100% Effective Learning Methods</h2>
-                <p class="p-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias maiores nisi amet sapiente pariatur accusamus, quam velit rerum doloribus earum accusantium, ipsam sequi ipsum dolorum! Delectus, quia aspernatur veritatis illo tempora molestiae voluptatibus aliquam, eligendi eum possimus modi aut! Nesciunt vitae velit excepturi, id quo sapiente et, esse nostrum pariatur aspernatur assumenda architecto tempora recusandae quos non explicabo temporibus qui dolor! Voluptatum, ipsum quia magni amet labore voluptas minima ad, voluptates, totam odio quos nesciunt facere reprehenderit debitis fugit suscipit. Aliquid molestias quis id placeat harum cum hic at modi, nam maiores facere officia esse, necessitatibus quidem fugit vel molestiae.</p>
+                <p class="p-2"> English speaking is compulsory in the institute .We always ensure that students get some new pieces of information everyday. In every module we have a structure that is unique. Getting together during the festival season is part of our time table. We also facilitate <strong>interaction between students and people from English speaking countries</strong> .  We ensure that <strong>individual attention</strong>  is given to all students. We always see to it that the latest study materials are given which helps the students in getting extra information and latest trends.We give students a <strong>test every week in the original IELTS format</strong>  that provides them an entire picture of how the exam is given and this removes the fear and prepares them to face the exam confidently. Generally, speaking is the toughest area for most non-English speaking students. Anticipating this problem, we give individual speeches everyday to exam–going students. We give extra listening in the morning every day. No doubt, this has helped students score satisfactorily in the listening module. 
+                   <strong>VOA News and BBC news listening</strong> help students improve their speaking and understanding skills
+                    </p>
             </div>
             <div class="md:w-1/3 relative">
                 <img src="/img/ClassRoom1.jpeg" alt="Dr.sunil Devaprabha" class="p-5 rounded-left">
@@ -69,7 +71,9 @@ $:intersecting?value.set(100):value.set(0);
             <div class="md:text-right md:w-2/3">
                
                 <h2 class="font-Display font-bold text-3xl p-2">Certified And Trustworthy</h2>
-                <p class="p-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias maiores nisi amet sapiente pariatur accusamus, quam velit rerum doloribus earum accusantium, ipsam sequi ipsum dolorum! Delectus, quia aspernatur veritatis illo tempora molestiae voluptatibus aliquam, eligendi eum possimus modi aut! Nesciunt vitae velit excepturi, id quo sapiente et, esse nostrum pariatur aspernatur assumenda architecto tempora recusandae quos non explicabo temporibus qui dolor! Voluptatum, ipsum quia magni amet labore voluptas minima ad, voluptates, totam odio quos nesciunt facere reprehenderit debitis fugit suscipit. Aliquid molestias quis id placeat harum cum hic at modi, nam maiores facere officia esse, necessitatibus quidem fugit vel molestiae.</p>
+                <p class="p-2">Sunil Devaprabha completed his <strong>PhD in Education (Effective Pedagogy)</strong>  from Commonwealth Vocational University New-Delhi a Registered agent of CVU Nuku’alofa, Tongatapu, Kingdom of Tonga
+                    He is a certified <strong>`Train the Trainer’</strong>  by the <strong>British Council-Chennai</strong>  and <strong>IDP-Kochi</strong> .
+                    </p>
             </div>
             
         </div>

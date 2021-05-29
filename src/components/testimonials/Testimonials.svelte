@@ -116,7 +116,7 @@ clearInterval(interval);
 <section id="Testimonials" class="p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden">
    <div class="md:w-2/3">
     <div class="">
-        <LargeHeading> <div class=""><i class="fas fa-quote-left absolute text-gray-300 text-6xl"></i><h2 class="text-left relative pt-10 pl-3">What People are Saying about Edustar?</h2></div> </LargeHeading>
+        <LargeHeading> <div class=""><i class="fas fa-quote-left absolute text-gray-300 text-6xl"></i><h2 class="text-left relative pt-10 pl-3">What People say about Edustar?</h2></div> </LargeHeading>
         <div class="absolute right-3 inline-block">
             <TestmNav currentItemNum={end} maxItems={maxItems} on:leftNavClick={handleLeftClick} on:rightNavClick={handleRightClick}/>
         </div>

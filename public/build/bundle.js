@@ -2514,7 +2514,7 @@ var app = (function () {
     	let h20;
     	let t4;
     	let p0;
-    	let strong;
+    	let strong0;
     	let t6;
     	let t7;
     	let div6;
@@ -2522,20 +2522,38 @@ var app = (function () {
     	let h21;
     	let t9;
     	let p1;
-    	let t11;
+    	let t10;
+    	let strong1;
+    	let t12;
+    	let strong2;
+    	let t14;
+    	let strong3;
+    	let t16;
+    	let strong4;
+    	let t18;
+    	let t19;
     	let div5;
     	let img1;
     	let img1_src_value;
-    	let t12;
+    	let t20;
     	let div9;
     	let div7;
     	let img2;
     	let img2_src_value;
-    	let t13;
+    	let t21;
     	let div8;
     	let h22;
-    	let t15;
+    	let t23;
     	let p2;
+    	let t24;
+    	let strong5;
+    	let t26;
+    	let strong6;
+    	let t28;
+    	let strong7;
+    	let t30;
+    	let strong8;
+    	let t32;
     	let current;
     	imageslide = new ImageSlide({ $$inline: true });
 
@@ -2579,9 +2597,9 @@ var app = (function () {
     			h20.textContent = "Excellent Faculty";
     			t4 = space();
     			p0 = element("p");
-    			strong = element("strong");
-    			strong.textContent = "Sunil Devaprabha(Phd)";
-    			t6 = text("  was a School teacher for 15 years turned British Council Trained Trainer and Success Coach.  An energetic Motivator, he has been sharing strategic skill, success tools and core values to the masses. He specializes in Positive Thinking and Peak Performance.  A passionate coach, he has trained and motivated over 30,000 students on Goal Setting, Energy, Rapport Building, Teachers Training, Parental Guidance, and Emotional Intelligence.");
+    			strong0 = element("strong");
+    			strong0.textContent = "Sunil Devaprabha(PhD)";
+    			t6 = text("  was a School teacher for 15 years turned British Council Trained Trainer and Success Coach.  An energetic Motivator, he has been sharing strategic skill, success tools and core values to the masses. He specializes in Positive Thinking and Peak Performance.  A passionate coach, he has trained and motivated over 30,000 students on Goal Setting, Energy, Rapport Building, Teachers Training, Parental Guidance, and Emotional Intelligence. With 18years of teaching experience; 2004 onward he has started his career as a resource person for teachers and conducted more than 150 sessions across the state (Kerala) alone.");
     			t7 = space();
     			div6 = element("div");
     			div4 = element("div");
@@ -2589,21 +2607,45 @@ var app = (function () {
     			h21.textContent = "100% Effective Learning Methods";
     			t9 = space();
     			p1 = element("p");
-    			p1.textContent = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias maiores nisi amet sapiente pariatur accusamus, quam velit rerum doloribus earum accusantium, ipsam sequi ipsum dolorum! Delectus, quia aspernatur veritatis illo tempora molestiae voluptatibus aliquam, eligendi eum possimus modi aut! Nesciunt vitae velit excepturi, id quo sapiente et, esse nostrum pariatur aspernatur assumenda architecto tempora recusandae quos non explicabo temporibus qui dolor! Voluptatum, ipsum quia magni amet labore voluptas minima ad, voluptates, totam odio quos nesciunt facere reprehenderit debitis fugit suscipit. Aliquid molestias quis id placeat harum cum hic at modi, nam maiores facere officia esse, necessitatibus quidem fugit vel molestiae.";
-    			t11 = space();
+    			t10 = text("English speaking is compulsory in the institute .We always ensure that students get some new pieces of information everyday. In every module we have a structure that is unique. Getting together during the festival season is part of our time table. We also facilitate ");
+    			strong1 = element("strong");
+    			strong1.textContent = "interaction between students and people from English speaking countries";
+    			t12 = text(" .  We ensure that ");
+    			strong2 = element("strong");
+    			strong2.textContent = "individual attention";
+    			t14 = text("  is given to all students. We always see to it that the latest study materials are given which helps the students in getting extra information and latest trends.We give students a ");
+    			strong3 = element("strong");
+    			strong3.textContent = "test every week in the original IELTS format";
+    			t16 = text("  that provides them an entire picture of how the exam is given and this removes the fear and prepares them to face the exam confidently. Generally, speaking is the toughest area for most non-English speaking students. Anticipating this problem, we give individual speeches everyday to exam–going students. We give extra listening in the morning every day. No doubt, this has helped students score satisfactorily in the listening module. \n                   ");
+    			strong4 = element("strong");
+    			strong4.textContent = "VOA News and BBC news listening";
+    			t18 = text(" help students improve their speaking and understanding skills");
+    			t19 = space();
     			div5 = element("div");
     			img1 = element("img");
-    			t12 = space();
+    			t20 = space();
     			div9 = element("div");
     			div7 = element("div");
     			img2 = element("img");
-    			t13 = space();
+    			t21 = space();
     			div8 = element("div");
     			h22 = element("h2");
     			h22.textContent = "Certified And Trustworthy";
-    			t15 = space();
+    			t23 = space();
     			p2 = element("p");
-    			p2.textContent = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias maiores nisi amet sapiente pariatur accusamus, quam velit rerum doloribus earum accusantium, ipsam sequi ipsum dolorum! Delectus, quia aspernatur veritatis illo tempora molestiae voluptatibus aliquam, eligendi eum possimus modi aut! Nesciunt vitae velit excepturi, id quo sapiente et, esse nostrum pariatur aspernatur assumenda architecto tempora recusandae quos non explicabo temporibus qui dolor! Voluptatum, ipsum quia magni amet labore voluptas minima ad, voluptates, totam odio quos nesciunt facere reprehenderit debitis fugit suscipit. Aliquid molestias quis id placeat harum cum hic at modi, nam maiores facere officia esse, necessitatibus quidem fugit vel molestiae.";
+    			t24 = text("Sunil Devaprabha completed his ");
+    			strong5 = element("strong");
+    			strong5.textContent = "PhD in Education (Effective Pedagogy)";
+    			t26 = text("  from Commonwealth Vocational University New-Delhi a Registered agent of CVU Nuku’alofa, Tongatapu, Kingdom of Tonga\n                    He is a certified ");
+    			strong6 = element("strong");
+    			strong6.textContent = "`Train the Trainer’";
+    			t28 = text("  by the ");
+    			strong7 = element("strong");
+    			strong7.textContent = "British Council-Chennai";
+    			t30 = text("  and ");
+    			strong8 = element("strong");
+    			strong8.textContent = "IDP-Kochi";
+    			t32 = text(" .");
     			attr_dev(div0, "class", "flex justify-center items-center");
     			add_location(div0, file$r, 19, 8, 468);
     			if (img0.src !== (img0_src_value = "/img/devaprabha1.jpeg")) attr_dev(img0, "src", img0_src_value);
@@ -2614,7 +2656,7 @@ var app = (function () {
     			add_location(div1, file$r, 41, 16, 1606);
     			attr_dev(h20, "class", "font-Display font-bold text-3xl p-2");
     			add_location(h20, file$r, 46, 16, 1846);
-    			add_location(strong, file$r, 47, 31, 1948);
+    			add_location(strong0, file$r, 47, 31, 1948);
     			attr_dev(p0, "class", "p-2");
     			add_location(p0, file$r, 47, 16, 1933);
     			attr_dev(div2, "class", " md:text-right w-full md:w-2/3");
@@ -2622,33 +2664,41 @@ var app = (function () {
     			attr_dev(div3, "class", "flex flex-col md:flex-row justify-between p-5 m-2 my-5 items-center flex-wrap");
     			add_location(div3, file$r, 39, 8, 1491);
     			attr_dev(h21, "class", "font-Display font-bold text-3xl p-2");
-    			add_location(h21, file$r, 55, 16, 2660);
+    			add_location(h21, file$r, 55, 16, 2838);
+    			add_location(strong1, file$r, 56, 299, 3222);
+    			add_location(strong2, file$r, 56, 406, 3329);
+    			add_location(strong3, file$r, 56, 624, 3547);
+    			add_location(strong4, file$r, 57, 19, 4066);
     			attr_dev(p1, "class", "p-2");
-    			add_location(p1, file$r, 56, 16, 2761);
+    			add_location(p1, file$r, 56, 16, 2939);
     			attr_dev(div4, "class", " md:text-left md:w-2/3");
-    			add_location(div4, file$r, 54, 12, 2607);
+    			add_location(div4, file$r, 54, 12, 2785);
     			if (img1.src !== (img1_src_value = "/img/ClassRoom1.jpeg")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "Dr.sunil Devaprabha");
     			attr_dev(img1, "class", "p-5 rounded-left");
-    			add_location(img1, file$r, 59, 16, 3602);
+    			add_location(img1, file$r, 61, 16, 4281);
     			attr_dev(div5, "class", "md:w-1/3 relative");
-    			add_location(div5, file$r, 58, 12, 3554);
+    			add_location(div5, file$r, 60, 12, 4233);
     			attr_dev(div6, "class", "flex flex-col md:flex-row justify-between p-5 m-2 my-5 items-center flex-wrap");
-    			add_location(div6, file$r, 50, 8, 2472);
+    			add_location(div6, file$r, 50, 8, 2650);
     			if (img2.src !== (img2_src_value = "/img/trust.png")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "Dr.sunil Devaprabha");
     			attr_dev(img2, "class", "p-5 rounded-left");
-    			add_location(img2, file$r, 65, 16, 3887);
+    			add_location(img2, file$r, 67, 16, 4566);
     			attr_dev(div7, "class", "md:w-1/3 relative");
-    			add_location(div7, file$r, 64, 12, 3839);
+    			add_location(div7, file$r, 66, 12, 4518);
     			attr_dev(h22, "class", "font-Display font-bold text-3xl p-2");
-    			add_location(h22, file$r, 70, 16, 4072);
+    			add_location(h22, file$r, 72, 16, 4751);
+    			add_location(strong5, file$r, 73, 62, 4892);
+    			add_location(strong6, file$r, 74, 38, 5102);
+    			add_location(strong7, file$r, 74, 83, 5147);
+    			add_location(strong8, file$r, 74, 129, 5193);
     			attr_dev(p2, "class", "p-2");
-    			add_location(p2, file$r, 71, 16, 4167);
+    			add_location(p2, file$r, 73, 16, 4846);
     			attr_dev(div8, "class", "md:text-right md:w-2/3");
-    			add_location(div8, file$r, 68, 12, 4003);
+    			add_location(div8, file$r, 70, 12, 4682);
     			attr_dev(div9, "class", "flex flex-col md:flex-row justify-between p-5 m-2 my-5 items-center flex-wrap");
-    			add_location(div9, file$r, 62, 8, 3728);
+    			add_location(div9, file$r, 64, 8, 4407);
     			attr_dev(div10, "class", "md:w-140");
     			add_location(div10, file$r, 38, 4, 1460);
     			attr_dev(div11, "class", "");
@@ -2676,7 +2726,7 @@ var app = (function () {
     			append_dev(div2, h20);
     			append_dev(div2, t4);
     			append_dev(div2, p0);
-    			append_dev(p0, strong);
+    			append_dev(p0, strong0);
     			append_dev(p0, t6);
     			append_dev(div10, t7);
     			append_dev(div10, div6);
@@ -2684,18 +2734,36 @@ var app = (function () {
     			append_dev(div4, h21);
     			append_dev(div4, t9);
     			append_dev(div4, p1);
-    			append_dev(div6, t11);
+    			append_dev(p1, t10);
+    			append_dev(p1, strong1);
+    			append_dev(p1, t12);
+    			append_dev(p1, strong2);
+    			append_dev(p1, t14);
+    			append_dev(p1, strong3);
+    			append_dev(p1, t16);
+    			append_dev(p1, strong4);
+    			append_dev(p1, t18);
+    			append_dev(div6, t19);
     			append_dev(div6, div5);
     			append_dev(div5, img1);
-    			append_dev(div10, t12);
+    			append_dev(div10, t20);
     			append_dev(div10, div9);
     			append_dev(div9, div7);
     			append_dev(div7, img2);
-    			append_dev(div9, t13);
+    			append_dev(div9, t21);
     			append_dev(div9, div8);
     			append_dev(div8, h22);
-    			append_dev(div8, t15);
+    			append_dev(div8, t23);
     			append_dev(div8, p2);
+    			append_dev(p2, t24);
+    			append_dev(p2, strong5);
+    			append_dev(p2, t26);
+    			append_dev(p2, strong6);
+    			append_dev(p2, t28);
+    			append_dev(p2, strong7);
+    			append_dev(p2, t30);
+    			append_dev(p2, strong8);
+    			append_dev(p2, t32);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
@@ -2869,7 +2937,7 @@ var app = (function () {
     			t3 = space();
     			div2 = element("div");
     			h30 = element("h3");
-    			h30.textContent = "Sunil Devaprabha (Phd)";
+    			h30.textContent = "Sunil Devaprabha (PhD)";
     			t5 = space();
     			h40 = element("h4");
     			h40.textContent = "Founder/ Instructor";
@@ -5621,11 +5689,11 @@ var app = (function () {
     /* src/components/Courses/CourseCard.svelte generated by Svelte v3.38.2 */
     const file$e = "src/components/Courses/CourseCard.svelte";
 
-    // (9:4) <Subtext black={redCard}>
+    // (10:4) <Subtext black={redCard}>
     function create_default_slot_1$4(ctx) {
     	let current;
-    	const default_slot_template = /*#slots*/ ctx[2].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[3], null);
+    	const default_slot_template = /*#slots*/ ctx[3].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[4], null);
 
     	const block = {
     		c: function create() {
@@ -5640,8 +5708,8 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty & /*$$scope*/ 8)) {
-    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[3], dirty, null, null);
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 16)) {
+    					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[4], dirty, null, null);
     				}
     			}
     		},
@@ -5663,14 +5731,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$4.name,
     		type: "slot",
-    		source: "(9:4) <Subtext black={redCard}>",
+    		source: "(10:4) <Subtext black={redCard}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (12:4) <Button rounded type="{redCard?'secondary':'primary' }" inverted={!redCard}>
+    // (13:4) <Button rounded type="{redCard?'secondary':'primary' }" inverted={!redCard}>
     function create_default_slot$5(ctx) {
     	let t;
 
@@ -5690,7 +5758,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$5.name,
     		type: "slot",
-    		source: "(12:4) <Button rounded type=\\\"{redCard?'secondary':'primary' }\\\" inverted={!redCard}>",
+    		source: "(13:4) <Button rounded type=\\\"{redCard?'secondary':'primary' }\\\" inverted={!redCard}>",
     		ctx
     	});
 
@@ -5739,9 +5807,13 @@ var app = (function () {
     			t2 = space();
     			create_component(button.$$.fragment);
     			attr_dev(h2, "class", h2_class_value = "font-bold text-2xl " + (/*redCard*/ ctx[0] ? "text-white" : "text-black") + " font-Display");
-    			add_location(h2, file$e, 7, 4, 302);
-    			attr_dev(div, "class", div_class_value = "w-72 p-5 m-5 border-r-2 md:border-r-0  border-l-2 border-gray-200 " + (/*redCard*/ ctx[0] ? "bg-blue-600 border-0" : "bg-none"));
-    			add_location(div, file$e, 6, 0, 175);
+    			add_location(h2, file$e, 8, 4, 342);
+
+    			attr_dev(div, "class", div_class_value = "w-72 p-5 m-5 border-r-2 md:border-r-0  border-l-2 border-gray-200 " + /*order*/ ctx[2] + " " + (/*redCard*/ ctx[0]
+    			? "bg-blue-600 border-0 md:-mt-5"
+    			: "bg-none"));
+
+    			add_location(div, file$e, 7, 0, 197);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5766,7 +5838,7 @@ var app = (function () {
     			const subtext_changes = {};
     			if (dirty & /*redCard*/ 1) subtext_changes.black = /*redCard*/ ctx[0];
 
-    			if (dirty & /*$$scope*/ 8) {
+    			if (dirty & /*$$scope*/ 16) {
     				subtext_changes.$$scope = { dirty, ctx };
     			}
 
@@ -5775,13 +5847,15 @@ var app = (function () {
     			if (dirty & /*redCard*/ 1) button_changes.type = /*redCard*/ ctx[0] ? "secondary" : "primary";
     			if (dirty & /*redCard*/ 1) button_changes.inverted = !/*redCard*/ ctx[0];
 
-    			if (dirty & /*$$scope*/ 8) {
+    			if (dirty & /*$$scope*/ 16) {
     				button_changes.$$scope = { dirty, ctx };
     			}
 
     			button.$set(button_changes);
 
-    			if (!current || dirty & /*redCard*/ 1 && div_class_value !== (div_class_value = "w-72 p-5 m-5 border-r-2 md:border-r-0  border-l-2 border-gray-200 " + (/*redCard*/ ctx[0] ? "bg-blue-600 border-0" : "bg-none"))) {
+    			if (!current || dirty & /*order, redCard*/ 5 && div_class_value !== (div_class_value = "w-72 p-5 m-5 border-r-2 md:border-r-0  border-l-2 border-gray-200 " + /*order*/ ctx[2] + " " + (/*redCard*/ ctx[0]
+    			? "bg-blue-600 border-0 md:-mt-5"
+    			: "bg-none"))) {
     				attr_dev(div, "class", div_class_value);
     			}
     		},
@@ -5819,7 +5893,8 @@ var app = (function () {
     	validate_slots("CourseCard", slots, ['default']);
     	let { redCard = false } = $$props;
     	let { cardTitle } = $$props;
-    	const writable_props = ["redCard", "cardTitle"];
+    	let { order } = $$props;
+    	const writable_props = ["redCard", "cardTitle", "order"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<CourseCard> was created with unknown prop '${key}'`);
@@ -5828,27 +5903,35 @@ var app = (function () {
     	$$self.$$set = $$props => {
     		if ("redCard" in $$props) $$invalidate(0, redCard = $$props.redCard);
     		if ("cardTitle" in $$props) $$invalidate(1, cardTitle = $$props.cardTitle);
-    		if ("$$scope" in $$props) $$invalidate(3, $$scope = $$props.$$scope);
+    		if ("order" in $$props) $$invalidate(2, order = $$props.order);
+    		if ("$$scope" in $$props) $$invalidate(4, $$scope = $$props.$$scope);
     	};
 
-    	$$self.$capture_state = () => ({ Button, Subtext, redCard, cardTitle });
+    	$$self.$capture_state = () => ({
+    		Button,
+    		Subtext,
+    		redCard,
+    		cardTitle,
+    		order
+    	});
 
     	$$self.$inject_state = $$props => {
     		if ("redCard" in $$props) $$invalidate(0, redCard = $$props.redCard);
     		if ("cardTitle" in $$props) $$invalidate(1, cardTitle = $$props.cardTitle);
+    		if ("order" in $$props) $$invalidate(2, order = $$props.order);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [redCard, cardTitle, slots, $$scope];
+    	return [redCard, cardTitle, order, slots, $$scope];
     }
 
     class CourseCard extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$e, create_fragment$e, safe_not_equal, { redCard: 0, cardTitle: 1 });
+    		init(this, options, instance$e, create_fragment$e, safe_not_equal, { redCard: 0, cardTitle: 1, order: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -5862,6 +5945,10 @@ var app = (function () {
 
     		if (/*cardTitle*/ ctx[1] === undefined && !("cardTitle" in props)) {
     			console.warn("<CourseCard> was created without expected prop 'cardTitle'");
+    		}
+
+    		if (/*order*/ ctx[2] === undefined && !("order" in props)) {
+    			console.warn("<CourseCard> was created without expected prop 'order'");
     		}
     	}
 
@@ -5878,6 +5965,14 @@ var app = (function () {
     	}
 
     	set cardTitle(value) {
+    		throw new Error("<CourseCard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get order() {
+    		throw new Error("<CourseCard>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set order(value) {
     		throw new Error("<CourseCard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -5912,7 +6007,7 @@ var app = (function () {
     	return block;
     }
 
-    // (11:4) <CourseCard cardTitle="Spoken English">
+    // (11:4) <CourseCard cardTitle="Spoken English" order="md:order-1 order-2">
     function create_default_slot_2$1(ctx) {
     	let t;
 
@@ -5932,14 +6027,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2$1.name,
     		type: "slot",
-    		source: "(11:4) <CourseCard cardTitle=\\\"Spoken English\\\">",
+    		source: "(11:4) <CourseCard cardTitle=\\\"Spoken English\\\" order=\\\"md:order-1 order-2\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (14:4) <CourseCard cardTitle="IELTS Coaching" redCard>
+    // (14:4) <CourseCard cardTitle="IELTS Coaching" redCard order="md:order-2 order-1">
     function create_default_slot_1$3(ctx) {
     	let t;
 
@@ -5959,14 +6054,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1$3.name,
     		type: "slot",
-    		source: "(14:4) <CourseCard cardTitle=\\\"IELTS Coaching\\\" redCard>",
+    		source: "(14:4) <CourseCard cardTitle=\\\"IELTS Coaching\\\" redCard order=\\\"md:order-2 order-1\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (17:4) <CourseCard cardTitle="Teachers Training">
+    // (17:4) <CourseCard cardTitle="Teachers Training" order="md:order-3 order-3">
     function create_default_slot$4(ctx) {
     	let t;
 
@@ -5986,7 +6081,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$4.name,
     		type: "slot",
-    		source: "(17:4) <CourseCard cardTitle=\\\"Teachers Training\\\">",
+    		source: "(17:4) <CourseCard cardTitle=\\\"Teachers Training\\\" order=\\\"md:order-3 order-3\\\">",
     		ctx
     	});
 
@@ -6040,6 +6135,7 @@ var app = (function () {
     	coursecard0 = new CourseCard({
     			props: {
     				cardTitle: "Spoken English",
+    				order: "md:order-1 order-2",
     				$$slots: { default: [create_default_slot_2$1] },
     				$$scope: { ctx }
     			},
@@ -6050,6 +6146,7 @@ var app = (function () {
     			props: {
     				cardTitle: "IELTS Coaching",
     				redCard: true,
+    				order: "md:order-2 order-1",
     				$$slots: { default: [create_default_slot_1$3] },
     				$$scope: { ctx }
     			},
@@ -6059,6 +6156,7 @@ var app = (function () {
     	coursecard2 = new CourseCard({
     			props: {
     				cardTitle: "Teachers Training",
+    				order: "md:order-3 order-3",
     				$$slots: { default: [create_default_slot$4] },
     				$$scope: { ctx }
     			},
@@ -6107,39 +6205,39 @@ var app = (function () {
     			t17 = space();
     			div5 = element("div");
     			h32 = element("h3");
-    			h32.textContent = "Staturdays and sundays are holidays for both online and offline classes";
+    			h32.textContent = "Saturdays and Sundays are holidays for both online and offline classes";
     			attr_dev(div0, "class", "flex flex-col md:flex-row justify-center items-center text-center py-16");
     			add_location(div0, file$d, 9, 0, 255);
     			attr_dev(h30, "class", "p-2 font-Display font-bold");
-    			add_location(h30, file$d, 22, 8, 1145);
+    			add_location(h30, file$d, 22, 8, 1226);
     			attr_dev(li0, "class", "text-blue-500");
-    			add_location(li0, file$d, 24, 16, 1258);
+    			add_location(li0, file$d, 24, 16, 1339);
     			attr_dev(li1, "class", "text-red-400");
-    			add_location(li1, file$d, 25, 16, 1321);
+    			add_location(li1, file$d, 25, 16, 1402);
     			attr_dev(li2, "class", "text-green-700");
-    			add_location(li2, file$d, 26, 16, 1383);
-    			add_location(ul0, file$d, 24, 12, 1254);
+    			add_location(li2, file$d, 26, 16, 1464);
+    			add_location(ul0, file$d, 24, 12, 1335);
     			attr_dev(div1, "class", "text-left p-2");
-    			add_location(div1, file$d, 23, 8, 1214);
+    			add_location(div1, file$d, 23, 8, 1295);
     			attr_dev(div2, "class", "flex justify-center ");
-    			add_location(div2, file$d, 21, 4, 1102);
+    			add_location(div2, file$d, 21, 4, 1183);
     			attr_dev(h31, "class", "p-2 font-Display font-bold");
-    			add_location(h31, file$d, 30, 8, 1510);
+    			add_location(h31, file$d, 30, 8, 1591);
     			attr_dev(li3, "class", "text-blue-500");
-    			add_location(li3, file$d, 32, 16, 1625);
+    			add_location(li3, file$d, 32, 16, 1706);
     			attr_dev(li4, "class", "text-red-400");
-    			add_location(li4, file$d, 33, 16, 1689);
-    			add_location(ul1, file$d, 32, 12, 1621);
+    			add_location(li4, file$d, 33, 16, 1770);
+    			add_location(ul1, file$d, 32, 12, 1702);
     			attr_dev(div3, "class", "text-left p-2");
-    			add_location(div3, file$d, 31, 8, 1581);
+    			add_location(div3, file$d, 31, 8, 1662);
     			attr_dev(div4, "class", "flex justify-center ");
-    			add_location(div4, file$d, 29, 4, 1467);
+    			add_location(div4, file$d, 29, 4, 1548);
     			attr_dev(h32, "class", "font-bold text-red-700 p-2");
-    			add_location(h32, file$d, 37, 8, 1793);
+    			add_location(h32, file$d, 37, 8, 1874);
     			attr_dev(div5, "class", "");
-    			add_location(div5, file$d, 36, 4, 1770);
+    			add_location(div5, file$d, 36, 4, 1851);
     			attr_dev(div6, "class", "bg-gray-100 p-5 md:w-2/3 m-auto");
-    			add_location(div6, file$d, 20, 0, 1052);
+    			add_location(div6, file$d, 20, 0, 1133);
     			attr_dev(section, "id", "Courses");
     			attr_dev(section, "class", "text-center mt-24 mb-16 w-screen overflow-hidden");
     			add_location(section, file$d, 7, 0, 129);
@@ -6392,13 +6490,14 @@ var app = (function () {
     			img = element("img");
     			t0 = space();
     			h3 = element("h3");
-    			h3.textContent = "Edustar Fastrack";
-    			if (img.src !== (img_src_value = "/img/logoRed.png")) attr_dev(img, "src", img_src_value);
+    			h3.textContent = "EDUSTAR FASTRACK";
+    			if (img.src !== (img_src_value = "/img/logo1.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Edustar Fastrack Logo");
-    			attr_dev(img, "class", "w-36");
-    			add_location(img, file$b, 1, 4, 35);
-    			add_location(h3, file$b, 2, 4, 110);
-    			attr_dev(div, "class", "inline-block p-5");
+    			attr_dev(img, "class", "w-20");
+    			add_location(img, file$b, 1, 4, 64);
+    			attr_dev(h3, "class", "font-Display  text-yellow-600 text-xl font-bold p-2");
+    			add_location(h3, file$b, 2, 4, 137);
+    			attr_dev(div, "class", "p-5 flex flex-col justify-center items-center");
     			add_location(div, file$b, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -7481,7 +7580,7 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut temporibus recusandae, incidunt mollitia qui quos obcaecati cumque. Maiores, reprehenderit provident?";
     			attr_dev(p, "class", "w-3/4 md:w-2/3 hidden md:block");
-    			add_location(p, file$7, 15, 8, 663);
+    			add_location(p, file$7, 15, 8, 667);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -7584,7 +7683,7 @@ var app = (function () {
     			create_component(largeheading.$$.fragment);
     			t0 = space();
     			h1 = element("h1");
-    			h1.textContent = "Fastrack your foriegn Dreams with edustar IELTS coaching";
+    			h1.textContent = "Fastrack your foreign Dreams with Edustar IELTS coaching";
     			t2 = space();
     			create_component(subtext.$$.fragment);
     			t3 = space();
@@ -7594,10 +7693,10 @@ var app = (function () {
     			create_component(heroimgs0.$$.fragment);
     			t5 = space();
     			create_component(heroimgs1.$$.fragment);
-    			attr_dev(h1, "class", "text-4xl md:text-5xl lg:text-6xl p-5 font-Display font-bold");
+    			attr_dev(h1, "class", "text-4xl md:text-5xl lg:text-6xl p-5 font-Display font-semibold");
     			add_location(h1, file$7, 11, 4, 493);
     			attr_dev(a, "href", "#ContactUs");
-    			add_location(a, file$7, 17, 0, 887);
+    			add_location(a, file$7, 17, 0, 891);
     			attr_dev(div0, "class", "md:w-1/2");
     			add_location(div0, file$7, 9, 4, 413);
     			attr_dev(div1, "class", "text-center flex flex-col justify-center items-center h-full py-36 md:py-48 md:pt-56 md:pb-36 mb-48 md:mb-0 relative");
@@ -8723,7 +8822,7 @@ var app = (function () {
     			div = element("div");
     			i = element("i");
     			h2 = element("h2");
-    			h2.textContent = "What People are Saying about Edustar?";
+    			h2.textContent = "What People say about Edustar?";
     			attr_dev(i, "class", "fas fa-quote-left absolute text-gray-300 text-6xl");
     			add_location(i, file$2, 118, 37, 5315);
     			attr_dev(h2, "class", "text-left relative pt-10 pl-3");
@@ -8917,15 +9016,15 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "absolute right-3 inline-block");
-    			add_location(div0, file$2, 119, 8, 5495);
+    			add_location(div0, file$2, 119, 8, 5488);
     			attr_dev(div1, "class", "");
     			add_location(div1, file$2, 117, 4, 5263);
     			attr_dev(div2, "class", "md:w-2/3");
     			add_location(div2, file$2, 116, 3, 5236);
     			attr_dev(div3, "class", "flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10");
-    			add_location(div3, file$2, 125, 4, 5747);
+    			add_location(div3, file$2, 125, 4, 5740);
     			attr_dev(div4, "class", "h-110 overflow-hidden");
-    			add_location(div4, file$2, 124, 0, 5707);
+    			add_location(div4, file$2, 124, 0, 5700);
     			attr_dev(section, "id", "Testimonials");
     			attr_dev(section, "class", "p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden");
     			add_location(section, file$2, 115, 0, 5120);

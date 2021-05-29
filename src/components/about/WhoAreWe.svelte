@@ -12,7 +12,7 @@
         <div class="p-5 flex justify-evenly items-center">
             <img src="/img/devaprabha1.jpeg" alt="" class="w-36 md:w-48 rounded-full">
             <div class="">
-                <h3 class="text-xl md:text-2xl font-bold">Sunil Devaprabha (Phd)</h3>
+                <h3 class="text-xl md:text-2xl font-bold">Sunil Devaprabha (PhD)</h3>
                 <h4>Founder/ Instructor</h4>
             </div>
         </div>
