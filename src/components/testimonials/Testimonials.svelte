@@ -2,7 +2,7 @@
 
 
 import LargeHeading from "../../shared/LargeHeading.svelte";
-import TestimonialModal from "./TestimonialModal.svelte";
+
 import TestmContent from "./TestmContent.svelte";
 import TestmNav from "./TestmNav.svelte";
 
@@ -39,7 +39,7 @@ let Testimonials =[{
     id:5,
     title:"Extremely patient in helping me address the elusive aspects of the IELTS",
     name:"Tom Thomas",
-    designation:"Engineer,Google,California",
+    designation:"Canada",
     content:"Dr. Sunil Devaprabha of EDU star (Idukki), was extremely patient in helping me address the elusive aspects of the IELTS, which were imperative to getting my required score . Regardless of the volume of students in the session, I always got personalized attention. It was the EDU Star  community's overall commitment that helped me achieve the band I wanted",
     img:"TomThomas.jpeg"
 }]
