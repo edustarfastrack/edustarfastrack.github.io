@@ -1483,6 +1483,11 @@ svelte-intersection-observer@^0.7.0:
   resolved "https://registry.yarnpkg.com/svelte-intersection-observer/-/svelte-intersection-observer-0.7.0.tgz#15a463ae63f47d60ffbdf7ba96056c24a9d67109"
   integrity sha512-i8nbGR1PKdq2ViuzJW6qGu+jy+J0MnlIv/u3CEqssIn5InRNQUU0Z9O9hJbTACMp3e966wU2plFMvl+X3AbmJg==
 
+svelte-lightbox@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/svelte-lightbox/-/svelte-lightbox-0.4.0.tgz#231759bcf9f21f09f392035a1a5665915c5024c6"
+  integrity sha512-O3bFRje5S8T9AqBBQAriCcELrolEpoRZ0dAGMYK0zJr1Dbg0wcZCIZTdcEO5Cmx9flnKNWPhMS7KfgoiIa2atg==
+
 svelte-scrollto@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/svelte-scrollto/-/svelte-scrollto-0.2.0.tgz#a1da47876466796bba4533a4346537f752f01680"

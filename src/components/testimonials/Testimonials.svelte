@@ -10,8 +10,8 @@ import TestmNav from "./TestmNav.svelte";
 let Testimonials =[{
     id:1,
     title:"Best IELTS training center one can find!",
-    name:"Angel Rose",
-    designation:"Engineer,Google,California",
+    name:"AngelRose Kannadan",
+    designation:"Regd Nurse,Australia",
     content:"Edustar is the best IELTS training center one can find. When I first joined I was nervous and not confident at all for attending the IELTS exam. But with just one month class, my standard of English along with my confidence increased to a great extend.My instructor Sunil sir was very friendly and professional. He always available for help and supported me to prepare better for my weakest sections and at the same time gave me valuable feedback on my performance based on the regular practice tests in the class. The advice I got really helped me face the test with more confidence and helped me to achieve my desired score of individual 7. Study material provided by Edustar was a very good resource for preparing for IELTS.All thanks to Sunil sir who was with me in every step of my way.I highly recommend Edustar Academy to all IELTS preparing candidates.",
     img:"AngelRose.jpeg"
 },{
@@ -42,7 +42,15 @@ let Testimonials =[{
     designation:"Canada",
     content:"Dr. Sunil Devaprabha of EDU star (Idukki), was extremely patient in helping me address the elusive aspects of the IELTS, which were imperative to getting my required score . Regardless of the volume of students in the session, I always got personalized attention. It was the EDU Star  community's overall commitment that helped me achieve the band I wanted",
     img:"TomThomas.jpeg"
+},{
+    id:6,
+    title:"Extremely patient in helping me address the elusive aspects of the IELTS",
+    name:"Tom Thomas",
+    designation:"Jismy jose Staff nurse Manchester University NHS Foundation trust",
+    content:"If you are an apirant of English language, Edustar International Education would be a top notch choice where you could find the best learning ambience I would rather say im much obliged to the unbeatable guidance provided by Dr. Sunil devaprabha in enhancing my English language proficiency to a much appreciated level",
+    img:"TomThomas.jpeg"
 }]
+
 
 let viewArray=[];
 let numItems=1;
@@ -122,7 +130,7 @@ clearInterval(interval);
         </div>
     </div>
 </div>
-<div class="h-110 overflow-hidden">
+<div class="h-105 overflow-hidden">
     <div class="flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10" >
         {#each viewArray as Testimonial(Testimonial.id)}
         

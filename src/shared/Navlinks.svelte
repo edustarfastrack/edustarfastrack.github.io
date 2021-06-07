@@ -4,9 +4,11 @@
     let navlinks=[
        {id:1,name:"Home",section:"#Home"},
        {id:2,name:"Courses",section:"#Courses"},
-       {id:3,name:"AboutUs",section:"#AboutUs"},
+       {id:3,name:"About Us",section:"#AboutUs"},
        {id:4,name:"Testimonials",section:"#Testimonials"},
-       {id:5,name:"Contact Us",section:"#ContactUs"}
+       {id:5,name:"Gallery",section:"#Gallery"},
+       {id:6,name:"Contact Us",section:"#ContactUs"}
+
 
 ]
 

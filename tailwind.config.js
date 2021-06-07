@@ -1,6 +1,6 @@
 module.exports = {
   purge: [ './src/**/*.html',
-  './src/**/*.js',],
+  './src/**/*.js', './src/**/*.svelte'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -24,7 +24,12 @@ module.exports = {
       borderRadius:{
         "left":"5rem 2rem 5rem 2rem",
         "right":"2rem 5rem 2rem 5rem"
-      }
+      },
+      maxWidth:{
+        "110":"36rem",
+        
+      },
+     
     },
   },
   variants: {

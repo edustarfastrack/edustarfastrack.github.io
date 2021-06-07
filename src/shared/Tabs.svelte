@@ -6,6 +6,7 @@ export let sideNav=false;
 
 let dispatch=createEventDispatcher();
 export let TabItems;
+export let TabRed=false;
 export let currentTab;
 
 </script>
@@ -14,7 +15,7 @@ export let currentTab;
     
     <div class="flex justify-center items-center flex-wrap py-5">
         {#each TabItems as Tab}
-           <h2 class="font-Display text-2xl md:text-3xl p-3 cursor-pointer {currentTab===Tab.name?'border-b-4 border-blue-500':''}" on:click={()=>{
+           <h2 class="font-Display text-2xl md:text-3xl p-3 cursor-pointer {currentTab===Tab.name&&TabRed===false?'border-b-4 border-blue-500':currentTab===Tab.name&&TabRed===true?'border-b-4 border-yellow-500':''}" on:click={()=>{
                dispatch('tabChange',Tab.name)
            }}>{Tab.name}</h2>
         {/each}

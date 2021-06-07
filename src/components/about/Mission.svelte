@@ -7,7 +7,7 @@
             <img src="/img/illustrations/target.png" alt="">
             <div class="p-5 font-Display font-bold">
                 <i class="fas fa-quote-left absolute text-yellow-100 text-6xl left-2"></i>
-            <p class="relative text-2xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur natus in adipisci ratione dolorem, vel quasi quas iure. Unde facere nesciunt aut accusantium placeat cum quo vitae corrupti dolorum sint ipsum rerum, sunt cupiditate fugiat aliquam. Nobis explicabo adipisci voluptates, tempora consequatur a minima quibusdam excepturi,?</p>
+            <p class="relative text-2xl">Training process that will enable the Students to maintain an attitude of positive thinking, and therefore forget the mistakes of the past and press on the greater achievements of future.  Accelerated training on a platform that combines Attitude, Goal Setting, Mind Mapping, Meditation and Memory Techniques.  We use Motivation, Presentation, Group Discussions, Exercises, Debate, and Games to inspire the participants.</p>
             </div>
     </div>
     
