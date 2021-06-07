@@ -6768,7 +6768,7 @@ var app = (function () {
     			t6 = space();
     			li2 = element("li");
     			a2 = element("a");
-    			a2.textContent = "Terms And COnditions";
+    			a2.textContent = "Terms And Conditions";
     			t8 = space();
     			h31 = element("h3");
     			t9 = text("Powered by ");
@@ -13760,11 +13760,11 @@ var app = (function () {
     			h2 = element("h2");
     			h2.textContent = "What People say about Edustar?";
     			attr_dev(i, "class", "fas fa-quote-left absolute text-gray-300 text-6xl");
-    			add_location(i, file$2, 126, 37, 5808);
+    			add_location(i, file$2, 126, 37, 5823);
     			attr_dev(h2, "class", "text-left relative pt-10 pl-3");
-    			add_location(h2, file$2, 126, 102, 5873);
+    			add_location(h2, file$2, 126, 102, 5888);
     			attr_dev(div, "class", "");
-    			add_location(div, file$2, 126, 23, 5794);
+    			add_location(div, file$2, 126, 23, 5809);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13952,18 +13952,18 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "absolute right-3 inline-block");
-    			add_location(div0, file$2, 127, 8, 5981);
+    			add_location(div0, file$2, 127, 8, 5996);
     			attr_dev(div1, "class", "");
-    			add_location(div1, file$2, 125, 4, 5756);
+    			add_location(div1, file$2, 125, 4, 5771);
     			attr_dev(div2, "class", "md:w-2/3");
-    			add_location(div2, file$2, 124, 3, 5729);
+    			add_location(div2, file$2, 124, 3, 5744);
     			attr_dev(div3, "class", "flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10");
-    			add_location(div3, file$2, 133, 4, 6233);
+    			add_location(div3, file$2, 133, 4, 6248);
     			attr_dev(div4, "class", "h-105 overflow-hidden");
-    			add_location(div4, file$2, 132, 0, 6193);
+    			add_location(div4, file$2, 132, 0, 6208);
     			attr_dev(section, "id", "Testimonials");
     			attr_dev(section, "class", "p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden");
-    			add_location(section, file$2, 123, 0, 5613);
+    			add_location(section, file$2, 123, 0, 5628);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -14082,7 +14082,7 @@ var app = (function () {
     		{
     			id: 4,
     			title: "My heartfelt thanks to EDUSTAR IELTS Academy",
-    			name: "Geroge Kutty",
+    			name: "George Kutty",
     			designation: "Canada",
     			content: "Dr.Sunil Sir , his way of teaching and giving attention to each student is nice.Practice makes man perfect, so this is also a place where practice gain, learnt many things during his classes.  It helps me to pin point my week areas/skills in English.He shared a lot of material to help improve our vocabulary. We were also given a lot of practice material and online practice sessions.He kept all the sessions interactive and constantly helped us improve in all aspects.Overall this is an excellent academy to recommend others. my heartfelt thanks to EDUSTAR IELTS Academy.",
     			img: "GeorgeKutty.jpg"
@@ -14097,11 +14097,11 @@ var app = (function () {
     		},
     		{
     			id: 6,
-    			title: "Extremely patient in helping me address the elusive aspects of the IELTS",
-    			name: "Tom Thomas",
-    			designation: "Jismy jose Staff nurse Manchester University NHS Foundation trust",
+    			title: "If you are an apirant of English language, Edustar International Education would be a top notch choice",
+    			name: "Jismy jose",
+    			designation: "Staff nurse Manchester University NHS Foundation trust",
     			content: "If you are an apirant of English language, Edustar International Education would be a top notch choice where you could find the best learning ambience I would rather say im much obliged to the unbeatable guidance provided by Dr. Sunil devaprabha in enhancing my English language proficiency to a much appreciated level",
-    			img: "TomThomas.jpeg"
+    			img: "Jismi.jpeg"
     		}
     	];
 
