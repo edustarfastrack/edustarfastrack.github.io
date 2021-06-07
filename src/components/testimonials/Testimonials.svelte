@@ -31,7 +31,7 @@ let Testimonials =[{
 },{
     id:4,
     title:"My heartfelt thanks to EDUSTAR IELTS Academy",
-    name:"Geroge Kutty",
+    name:"George Kutty",
     designation:"Canada",
     content:"Dr.Sunil Sir , his way of teaching and giving attention to each student is nice.Practice makes man perfect, so this is also a place where practice gain, learnt many things during his classes.  It helps me to pin point my week areas/skills in English.He shared a lot of material to help improve our vocabulary. We were also given a lot of practice material and online practice sessions.He kept all the sessions interactive and constantly helped us improve in all aspects.Overall this is an excellent academy to recommend others. my heartfelt thanks to EDUSTAR IELTS Academy.",
     img:"GeorgeKutty.jpg"
@@ -44,11 +44,11 @@ let Testimonials =[{
     img:"TomThomas.jpeg"
 },{
     id:6,
-    title:"Extremely patient in helping me address the elusive aspects of the IELTS",
-    name:"Tom Thomas",
-    designation:"Jismy jose Staff nurse Manchester University NHS Foundation trust",
+    title:"If you are an apirant of English language, Edustar International Education would be a top notch choice",
+    name:"Jismy jose",
+    designation:"Staff nurse Manchester University NHS Foundation trust",
     content:"If you are an apirant of English language, Edustar International Education would be a top notch choice where you could find the best learning ambience I would rather say im much obliged to the unbeatable guidance provided by Dr. Sunil devaprabha in enhancing my English language proficiency to a much appreciated level",
-    img:"TomThomas.jpeg"
+    img:"Jismi.jpeg"
 }]
 
 

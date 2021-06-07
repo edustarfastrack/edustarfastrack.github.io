@@ -7,7 +7,7 @@
         <ul class="flex flex-wrap">
             <li class="p-3"><a href="./index.html">Home</a></li>
             <li class="p-3"><a href="./privacy.html">Privacy Policiy</a></li>
-<li class="p-3"><a href="./TermsAndConditions.html">Terms And COnditions</a></li>
+<li class="p-3"><a href="./TermsAndConditions.html">Terms And Conditions</a></li>
         </ul>
     </div>
     <h3 class="font-body text-white p-3">Powered by <a href="https://infyplus.tech" class="font-bold">Infyplus Innovations</a> </h3>
