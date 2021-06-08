@@ -2672,7 +2672,7 @@ var app = (function () {
     			t19 = space();
     			div8 = element("div");
     			h22 = element("h2");
-    			h22.textContent = "Certified And Trustworthy";
+    			h22.textContent = "Certified & Trustworthy";
     			t21 = space();
     			p2 = element("p");
     			t22 = text("Sunil Devaprabha completed his ");
@@ -2730,12 +2730,12 @@ var app = (function () {
     			add_location(div7, file$A, 65, 12, 4530);
     			attr_dev(h22, "class", "font-Display font-bold text-3xl p-2");
     			add_location(h22, file$A, 71, 16, 4763);
-    			add_location(strong4, file$A, 72, 62, 4904);
-    			add_location(strong5, file$A, 73, 38, 5114);
-    			add_location(strong6, file$A, 73, 83, 5159);
-    			add_location(strong7, file$A, 73, 129, 5205);
+    			add_location(strong4, file$A, 72, 62, 4902);
+    			add_location(strong5, file$A, 73, 38, 5112);
+    			add_location(strong6, file$A, 73, 83, 5157);
+    			add_location(strong7, file$A, 73, 129, 5203);
     			attr_dev(p2, "class", "p-2");
-    			add_location(p2, file$A, 72, 16, 4858);
+    			add_location(p2, file$A, 72, 16, 4856);
     			attr_dev(div8, "class", "md:text-right md:w-2/3");
     			add_location(div8, file$A, 69, 12, 4694);
     			attr_dev(div9, "class", "flex flex-col md:flex-row justify-between p-5 m-2 my-5 items-center flex-wrap");
@@ -4063,7 +4063,7 @@ var app = (function () {
     			i = element("i");
     			t = text(" Get Directions");
     			attr_dev(i, "class", "fas fa-directions");
-    			add_location(i, file$u, 14, 50, 1129);
+    			add_location(i, file$u, 14, 50, 1131);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -4132,7 +4132,7 @@ var app = (function () {
     			br0 = element("br");
     			t3 = text(" Varakukala Building ");
     			br1 = element("br");
-    			t4 = text(" Opp.Vetinary Hospital,Nedumkanadam ");
+    			t4 = text(" Opp.Vetinary Hospital, Nedumkanadam, ");
     			br2 = element("br");
     			t5 = text("Idukki, Kerala");
     			t6 = space();
@@ -4145,7 +4145,7 @@ var app = (function () {
     			add_location(h2, file$u, 5, 4, 143);
     			add_location(br0, file$u, 8, 51, 293);
     			add_location(br1, file$u, 8, 76, 318);
-    			add_location(br2, file$u, 8, 116, 358);
+    			add_location(br2, file$u, 8, 118, 360);
     			attr_dev(p, "class", " font-body");
     			add_location(p, file$u, 8, 12, 254);
     			attr_dev(div0, "class", "");
@@ -4156,12 +4156,12 @@ var app = (function () {
     			iframe.allowFullscreen = "";
     			attr_dev(iframe, "loading", "lazy");
     			attr_dev(iframe, "class", "w-full h-64 p-3 bg-blue-50");
-    			add_location(iframe, file$u, 12, 12, 451);
+    			add_location(iframe, file$u, 12, 12, 453);
     			attr_dev(a, "target", "_blank");
     			attr_dev(a, "href", "https://www.google.com/maps/dir//Dr.+Sunil%27s+IELTS+CENTER/data=!4m8!4m7!1m0!1m5!1m1!1s0x3b07a733ff04eeed:0x44c8ee5f5fbf504d!2m2!1d77.1541646!2d9.839294299999999");
-    			add_location(a, file$u, 13, 12, 888);
+    			add_location(a, file$u, 13, 12, 890);
     			attr_dev(div1, "class", "w-full ");
-    			add_location(div1, file$u, 11, 8, 417);
+    			add_location(div1, file$u, 11, 8, 419);
     			attr_dev(div2, "class", "");
     			add_location(div2, file$u, 6, 4, 204);
     			attr_dev(div3, "class", "bg-white p-5 w-full rounded w-86 md:w-110");
@@ -4447,7 +4447,7 @@ var app = (function () {
     	contactswbtn1 = new ContactSwBtn({
     			props: {
     				icon: "map-marker-alt",
-    				subtext: "Nedumkanadam,Idukki",
+    				subtext: "Nedumkanadam, Idukki",
     				selected: /*currentItem*/ ctx[0] === "Address" ? true : false
     			},
     			$$inline: true
@@ -13761,11 +13761,11 @@ var app = (function () {
     			h2 = element("h2");
     			h2.textContent = "What People say about Edustar?";
     			attr_dev(i, "class", "fas fa-quote-left absolute text-gray-300 text-6xl");
-    			add_location(i, file$2, 126, 37, 5808);
+    			add_location(i, file$2, 126, 37, 5809);
     			attr_dev(h2, "class", "text-left relative pt-10 pl-3");
-    			add_location(h2, file$2, 126, 102, 5873);
+    			add_location(h2, file$2, 126, 102, 5874);
     			attr_dev(div, "class", "");
-    			add_location(div, file$2, 126, 23, 5794);
+    			add_location(div, file$2, 126, 23, 5795);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13953,18 +13953,18 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "absolute right-3 inline-block");
-    			add_location(div0, file$2, 127, 8, 5981);
+    			add_location(div0, file$2, 127, 8, 5982);
     			attr_dev(div1, "class", "");
-    			add_location(div1, file$2, 125, 4, 5756);
+    			add_location(div1, file$2, 125, 4, 5757);
     			attr_dev(div2, "class", "md:w-2/3");
-    			add_location(div2, file$2, 124, 3, 5729);
+    			add_location(div2, file$2, 124, 3, 5730);
     			attr_dev(div3, "class", "flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10");
-    			add_location(div3, file$2, 133, 4, 6233);
+    			add_location(div3, file$2, 133, 4, 6234);
     			attr_dev(div4, "class", "h-115 overflow-hidden");
-    			add_location(div4, file$2, 132, 0, 6193);
+    			add_location(div4, file$2, 132, 0, 6194);
     			attr_dev(section, "id", "Testimonials");
     			attr_dev(section, "class", "p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden");
-    			add_location(section, file$2, 123, 0, 5613);
+    			add_location(section, file$2, 123, 0, 5614);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -14059,7 +14059,7 @@ var app = (function () {
     		{
     			id: 1,
     			title: "Best IELTS training center one can find!",
-    			name: "AngelRose Kannadan",
+    			name: "Angel Rose Kannadan",
     			designation: "Regd Nurse,Australia",
     			content: "Edustar is the best IELTS training center one can find. When I first joined I was nervous and not confident at all for attending the IELTS exam. But with just one month class, my standard of English along with my confidence increased to a great extend.My instructor Sunil sir was very friendly and professional. He always available for help and supported me to prepare better for my weakest sections and at the same time gave me valuable feedback on my performance based on the regular practice tests in the class. The advice I got really helped me face the test with more confidence and helped me to achieve my desired score of individual 7. Study material provided by Edustar was a very good resource for preparing for IELTS.All thanks to Sunil sir who was with me in every step of my way.I highly recommend Edustar Academy to all IELTS preparing candidates.",
     			img: "AngelRose.jpeg"
