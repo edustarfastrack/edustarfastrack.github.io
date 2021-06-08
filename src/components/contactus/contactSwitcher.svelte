@@ -11,7 +11,7 @@ export let currentItem;
         dispatch('TabChange',"Phone");
     }}/>
   
-    <ContactSwBtn icon="map-marker-alt" subtext="Nedumkanadam,Idukki" selected={currentItem==="Address"?true:false} on:click={()=>{
+    <ContactSwBtn icon="map-marker-alt" subtext="Nedumkanadam, Idukki" selected={currentItem==="Address"?true:false} on:click={()=>{
         dispatch('TabChange',"Address");
     }} />
     

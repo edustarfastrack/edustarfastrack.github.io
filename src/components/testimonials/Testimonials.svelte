@@ -10,7 +10,7 @@ import TestmNav from "./TestmNav.svelte";
 let Testimonials =[{
     id:1,
     title:"Best IELTS training center one can find!",
-    name:"AngelRose Kannadan",
+    name:"Angel Rose Kannadan",
     designation:"Regd Nurse,Australia",
     content:"Edustar is the best IELTS training center one can find. When I first joined I was nervous and not confident at all for attending the IELTS exam. But with just one month class, my standard of English along with my confidence increased to a great extend.My instructor Sunil sir was very friendly and professional. He always available for help and supported me to prepare better for my weakest sections and at the same time gave me valuable feedback on my performance based on the regular practice tests in the class. The advice I got really helped me face the test with more confidence and helped me to achieve my desired score of individual 7. Study material provided by Edustar was a very good resource for preparing for IELTS.All thanks to Sunil sir who was with me in every step of my way.I highly recommend Edustar Academy to all IELTS preparing candidates.",
     img:"AngelRose.jpeg"

@@ -6,7 +6,7 @@ import Button from "../../shared/Button.svelte";
     <h2 class="font-dispalay text-2xl p-3">Find us Here</h2>
     <div class="">
         <div class="">
-            <p class=" font-body">Edustar Fastrack <br> Varakukala Building <br> Opp.Vetinary Hospital,Nedumkanadam <br>Idukki, Kerala</p>
+            <p class=" font-body">Edustar Fastrack <br> Varakukala Building <br> Opp.Vetinary Hospital, Nedumkanadam, <br>Idukki, Kerala</p>
             
         </div>
         <div class="w-full ">
