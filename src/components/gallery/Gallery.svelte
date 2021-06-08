@@ -16,7 +16,7 @@ const handleModalOpen=()=>{
 }
 </script>
 
-<section id="Gallery" class="h-140 flex justify-center items-center flex-col">
+<section id="Gallery" class="h-140 flex justify-center items-center flex-col py-10">
     <LargeHeading>Gallery</LargeHeading>
     <div class="md:w-2/3 flex flex-col justify-center items-center">
         <Tabs {currentTab} {TabItems} on:tabChange={handleTabChange} TabRed={true}/>

@@ -29,6 +29,9 @@ module.exports = {
         "110":"36rem",
         
       },
+      maxHeight:{
+        "screen":"100vh"
+      }
      
     },
   },

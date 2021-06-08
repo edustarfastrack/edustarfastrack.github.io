@@ -44,7 +44,7 @@ let Testimonials =[{
     img:"TomThomas.jpeg"
 },{
     id:6,
-    title:"If you are an apirant of English language, Edustar International Education would be a top notch choice",
+    title:"If you are an apirant of English language, Edustar Fastrack would be a top notch choice",
     name:"Jismy jose",
     designation:"Staff nurse Manchester University NHS Foundation trust",
     content:"If you are an apirant of English language, Edustar International Education would be a top notch choice where you could find the best learning ambience I would rather say im much obliged to the unbeatable guidance provided by Dr. Sunil devaprabha in enhancing my English language proficiency to a much appreciated level",
@@ -130,7 +130,7 @@ clearInterval(interval);
         </div>
     </div>
 </div>
-<div class="h-105 overflow-hidden">
+<div class="h-115 overflow-hidden">
     <div class="flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10" >
         {#each viewArray as Testimonial(Testimonial.id)}
         

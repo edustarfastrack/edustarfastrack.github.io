@@ -2969,7 +2969,7 @@ var app = (function () {
     			t0 = space();
     			div1 = element("div");
     			p = element("p");
-    			p.textContent = "EDU Star FASTRACK, a premier institute in IELTS was established with an aim to impart quality training to IELTS aspirants. This institute has been branched out to Spoken English, Teachers Training, Interview training and IELTS. Those who have passed out of this institute with flying colours bear testimony to the fact that EDU Star FASTRACK is something special. We provide hostel facilities too";
+    			p.textContent = "EDUSTAR FASTRACK, a premier institute in IELTS was established with an aim to impart quality training to IELTS aspirants. This institute has been branched out to Spoken English, Teachers Training, Interview training and IELTS. Those who have passed out of this institute with flying colours bear testimony to the fact that Edustar Fastrack is something special. We provide hostel facilities too";
     			t2 = space();
     			div3 = element("div");
     			img1 = element("img");
@@ -3002,25 +3002,25 @@ var app = (function () {
     			if (img1.src !== (img1_src_value = "/img/devaprabha1.jpeg")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "");
     			attr_dev(img1, "class", "w-36 md:w-48 rounded-full");
-    			add_location(img1, file$z, 12, 12, 834);
+    			add_location(img1, file$z, 12, 12, 832);
     			attr_dev(h30, "class", "text-xl md:text-2xl font-bold");
-    			add_location(h30, file$z, 14, 16, 952);
-    			add_location(h40, file$z, 15, 16, 1040);
+    			add_location(h30, file$z, 14, 16, 950);
+    			add_location(h40, file$z, 15, 16, 1038);
     			attr_dev(div2, "class", "");
-    			add_location(div2, file$z, 13, 12, 921);
+    			add_location(div2, file$z, 13, 12, 919);
     			attr_dev(div3, "class", "p-5 flex justify-evenly items-center");
-    			add_location(div3, file$z, 11, 8, 771);
+    			add_location(div3, file$z, 11, 8, 769);
     			if (img2.src !== (img2_src_value = "/img/Bijo.jpg")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "");
     			attr_dev(img2, "class", "w-36 md:w-48 rounded-full");
-    			add_location(img2, file$z, 19, 12, 1174);
+    			add_location(img2, file$z, 19, 12, 1172);
     			attr_dev(h31, "class", "text-xl md:text-2xl font-bold");
-    			add_location(h31, file$z, 21, 16, 1284);
-    			add_location(h41, file$z, 22, 16, 1359);
+    			add_location(h31, file$z, 21, 16, 1282);
+    			add_location(h41, file$z, 22, 16, 1357);
     			attr_dev(div4, "class", "");
-    			add_location(div4, file$z, 20, 12, 1253);
+    			add_location(div4, file$z, 20, 12, 1251);
     			attr_dev(div5, "class", "p-5 flex justify-evenly items-center");
-    			add_location(div5, file$z, 18, 8, 1111);
+    			add_location(div5, file$z, 18, 8, 1109);
     			attr_dev(div6, "class", "md:w-140");
     			add_location(div6, file$z, 4, 4, 138);
     			attr_dev(div7, "class", "flex justify-center items-center");
@@ -6323,7 +6323,7 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			t = text("EDU Star Fastrack Teacher Training seeks to provide rigorous personal and professional training to teachers in the most effective way possible, with a user-friendly platform. Our vision is to be an indispensable source of information, guidance and continuing education, striving towards achieving excellence in teaching. This is a journey through new avenues of self-discovery and self-improvement – after all, the best teachers are those who develop continuously with holistic learning!");
+    			t = text("Edustar Fastrack Teacher Training seeks to provide rigorous personal and professional training to teachers in the most effective way possible, with a user-friendly platform. Our vision is to be an indispensable source of information, guidance and continuing education, striving towards achieving excellence in teaching. This is a journey through new avenues of self-discovery and self-improvement – after all, the best teachers are those who develop continuously with holistic learning!");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
@@ -6515,59 +6515,59 @@ var app = (function () {
     			attr_dev(div0, "class", "flex flex-col md:flex-row justify-center items-center text-center py-16 flex-wrap");
     			add_location(div0, file$m, 9, 0, 255);
     			attr_dev(h30, "class", "p-2 font-Display font-bold");
-    			add_location(h30, file$m, 24, 16, 2084);
+    			add_location(h30, file$m, 24, 16, 2091);
     			attr_dev(li0, "class", "text-blue-500");
-    			add_location(li0, file$m, 26, 24, 2213);
+    			add_location(li0, file$m, 26, 24, 2220);
     			attr_dev(li1, "class", "text-red-400");
-    			add_location(li1, file$m, 27, 24, 2286);
+    			add_location(li1, file$m, 27, 24, 2293);
     			attr_dev(li2, "class", "text-green-700");
-    			add_location(li2, file$m, 28, 24, 2358);
-    			add_location(ul0, file$m, 26, 20, 2209);
+    			add_location(li2, file$m, 28, 24, 2365);
+    			add_location(ul0, file$m, 26, 20, 2216);
     			attr_dev(div1, "class", "text-left p-2");
-    			add_location(div1, file$m, 25, 16, 2161);
+    			add_location(div1, file$m, 25, 16, 2168);
     			attr_dev(div2, "class", "flex justify-center ");
-    			add_location(div2, file$m, 23, 12, 2033);
+    			add_location(div2, file$m, 23, 12, 2040);
     			attr_dev(h31, "class", "p-2 font-Display font-bold");
-    			add_location(h31, file$m, 32, 16, 2519);
+    			add_location(h31, file$m, 32, 16, 2526);
     			attr_dev(li3, "class", "text-blue-500");
-    			add_location(li3, file$m, 34, 24, 2650);
+    			add_location(li3, file$m, 34, 24, 2657);
     			attr_dev(li4, "class", "text-red-400");
-    			add_location(li4, file$m, 35, 24, 2724);
-    			add_location(ul1, file$m, 34, 20, 2646);
+    			add_location(li4, file$m, 35, 24, 2731);
+    			add_location(ul1, file$m, 34, 20, 2653);
     			attr_dev(div3, "class", "text-left p-2");
-    			add_location(div3, file$m, 33, 16, 2598);
+    			add_location(div3, file$m, 33, 16, 2605);
     			attr_dev(div4, "class", "flex justify-center ");
-    			add_location(div4, file$m, 31, 12, 2468);
+    			add_location(div4, file$m, 31, 12, 2475);
     			attr_dev(div5, "class", "md:w-1/2 md:border-r-2");
-    			add_location(div5, file$m, 22, 8, 1984);
+    			add_location(div5, file$m, 22, 8, 1991);
     			attr_dev(p0, "class", "font-bold underline p-2");
-    			add_location(p0, file$m, 40, 12, 2888);
+    			add_location(p0, file$m, 40, 12, 2895);
     			attr_dev(i0, "class", "fas fa-plane text-blue-400");
-    			add_location(i0, file$m, 42, 20, 3041);
-    			add_location(li5, file$m, 42, 16, 3037);
+    			add_location(i0, file$m, 42, 20, 3048);
+    			add_location(li5, file$m, 42, 16, 3044);
     			attr_dev(i1, "class", "fas fa-plane text-blue-400");
-    			add_location(i1, file$m, 43, 20, 3136);
-    			add_location(li6, file$m, 43, 16, 3132);
+    			add_location(i1, file$m, 43, 20, 3143);
+    			add_location(li6, file$m, 43, 16, 3139);
     			attr_dev(i2, "class", "fas fa-plane text-blue-400");
-    			add_location(i2, file$m, 44, 20, 3233);
-    			add_location(li7, file$m, 44, 16, 3229);
+    			add_location(i2, file$m, 44, 20, 3240);
+    			add_location(li7, file$m, 44, 16, 3236);
     			attr_dev(i3, "class", "fas fa-plane text-blue-400");
-    			add_location(i3, file$m, 45, 20, 3333);
-    			add_location(li8, file$m, 45, 16, 3329);
+    			add_location(i3, file$m, 45, 20, 3340);
+    			add_location(li8, file$m, 45, 16, 3336);
     			attr_dev(ul2, "class", "text-left px-5");
-    			add_location(ul2, file$m, 41, 12, 2993);
+    			add_location(ul2, file$m, 41, 12, 3000);
     			attr_dev(p1, "class", "font-bold text-red-400 p-5");
-    			add_location(p1, file$m, 47, 13, 3438);
+    			add_location(p1, file$m, 47, 13, 3445);
     			attr_dev(div6, "class", "md:w-1/2 font-Display");
-    			add_location(div6, file$m, 39, 8, 2840);
-    			attr_dev(div7, "class", " flex flex-wrap items-center justify-center");
-    			add_location(div7, file$m, 21, 4, 1918);
+    			add_location(div6, file$m, 39, 8, 2847);
+    			attr_dev(div7, "class", " flex flex-wrap items-center justify-center text-xl");
+    			add_location(div7, file$m, 21, 4, 1917);
     			attr_dev(h32, "class", "font-bold text-red-700 p-2");
-    			add_location(h32, file$m, 51, 8, 3577);
+    			add_location(h32, file$m, 51, 8, 3584);
     			attr_dev(div8, "class", "");
-    			add_location(div8, file$m, 50, 4, 3554);
+    			add_location(div8, file$m, 50, 4, 3561);
     			attr_dev(div9, "class", "bg-gray-100 p-5 md:w-2/3 m-auto");
-    			add_location(div9, file$m, 20, 0, 1868);
+    			add_location(div9, file$m, 20, 0, 1867);
     			attr_dev(section, "id", "Courses");
     			attr_dev(section, "class", "text-center mt-24 mb-16 w-screen overflow-hidden");
     			add_location(section, file$m, 7, 0, 129);
@@ -6777,26 +6777,26 @@ var app = (function () {
     			attr_dev(h30, "class", "font-display font-bold text-white p-3");
     			add_location(h30, file$l, 4, 4, 122);
     			attr_dev(a0, "href", "./index.html");
-    			add_location(a0, file$l, 7, 28, 365);
+    			add_location(a0, file$l, 7, 28, 393);
     			attr_dev(li0, "class", "p-3");
-    			add_location(li0, file$l, 7, 12, 349);
+    			add_location(li0, file$l, 7, 12, 377);
     			attr_dev(a1, "href", "./privacy.html");
-    			add_location(a1, file$l, 8, 28, 430);
+    			add_location(a1, file$l, 8, 28, 458);
     			attr_dev(li1, "class", "p-3");
-    			add_location(li1, file$l, 8, 12, 414);
+    			add_location(li1, file$l, 8, 12, 442);
     			attr_dev(a2, "href", "./TermsAndConditions.html");
-    			add_location(a2, file$l, 9, 16, 496);
+    			add_location(a2, file$l, 9, 16, 524);
     			attr_dev(li2, "class", "p-3");
-    			add_location(li2, file$l, 9, 0, 480);
-    			attr_dev(ul, "class", "flex flex-wrap");
+    			add_location(li2, file$l, 9, 0, 508);
+    			attr_dev(ul, "class", "flex justify-center items-center flex-wrap");
     			add_location(ul, file$l, 6, 8, 309);
     			attr_dev(div, "class", "font-body text-white flex justify-center items-center");
     			add_location(div, file$l, 5, 4, 233);
     			attr_dev(a3, "href", "https://infyplus.tech");
     			attr_dev(a3, "class", "font-bold");
-    			add_location(a3, file$l, 12, 52, 639);
+    			add_location(a3, file$l, 12, 52, 667);
     			attr_dev(h31, "class", "font-body text-white p-3");
-    			add_location(h31, file$l, 12, 4, 591);
+    			add_location(h31, file$l, 12, 4, 619);
     			attr_dev(section, "id", "Footer");
     			attr_dev(section, "class", "bg-purple-700 p-5 text-center");
     			add_location(section, file$l, 3, 0, 58);
@@ -10756,7 +10756,7 @@ var app = (function () {
     	let current;
     	let mounted;
     	let dispose;
-    	let each_value = /*img*/ ctx[2];
+    	let each_value = /*img*/ ctx[3];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -10780,11 +10780,11 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(i, "class", "fas fa-window-close text-3xl text-red-600");
-    			add_location(i, file$d, 33, 12, 929);
+    			attr_dev(i, "class", "fas fa-window-close text-3xl text-red-500");
+    			add_location(i, file$d, 33, 12, 933);
     			attr_dev(div0, "class", "fixed cursor-pointer right-5 top-5");
-    			add_location(div0, file$d, 30, 8, 805);
-    			attr_dev(div1, "class", "bg-white p-5 rounded-md  m-5 flex items-center justify-center flex-wrap h-screen overflow-scroll relative");
+    			add_location(div0, file$d, 30, 8, 809);
+    			attr_dev(div1, "class", "bg-white p-5 rounded-md  m-5 flex items-center justify-center flex-wrap max-h-screen overflow-scroll relative");
     			add_location(div1, file$d, 29, 4, 677);
     			attr_dev(div2, "class", "h-screen w-screen fixed bg-black bg-opacity-70 left-0 top-0 z-50 flex justify-center  items-center ");
     			add_location(div2, file$d, 25, 0, 506);
@@ -10812,8 +10812,8 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*img*/ 4) {
-    				each_value = /*img*/ ctx[2];
+    			if (dirty & /*galItem, img*/ 10) {
+    				each_value = /*img*/ ctx[3];
     				validate_each_argument(each_value);
     				let i;
 
@@ -10888,7 +10888,7 @@ var app = (function () {
     			attr_dev(img_1, "slot", "thumbnail");
     			if (img_1.src !== (img_1_src_value = /*imgItem*/ ctx[7])) attr_dev(img_1, "src", img_1_src_value);
     			attr_dev(img_1, "alt", "Thumbnail");
-    			add_location(img_1, file$d, 39, 12, 1205);
+    			add_location(img_1, file$d, 39, 12, 1185);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img_1, anchor);
@@ -10921,7 +10921,7 @@ var app = (function () {
     			attr_dev(img_1, "slot", "image");
     			if (img_1.src !== (img_1_src_value = /*imgItem*/ ctx[7])) attr_dev(img_1, "src", img_1_src_value);
     			attr_dev(img_1, "alt", "");
-    			add_location(img_1, file$d, 40, 12, 1272);
+    			add_location(img_1, file$d, 40, 12, 1252);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img_1, anchor);
@@ -10954,7 +10954,7 @@ var app = (function () {
     			props: {
     				thumbnail: true,
     				imagePreset: "fit",
-    				description: "Lightbox with thumbnail and image",
+    				description: /*galItem*/ ctx[1],
     				$$slots: {
     					image: [create_image_slot],
     					thumbnail: [create_thumbnail_slot]
@@ -10970,7 +10970,7 @@ var app = (function () {
     			create_component(lightbox.$$.fragment);
     			t = space();
     			attr_dev(div, "class", " w-full md:w-56 ring-2 m-3  relative");
-    			add_location(div, file$d, 37, 7, 1046);
+    			add_location(div, file$d, 37, 7, 1050);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10980,6 +10980,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const lightbox_changes = {};
+    			if (dirty & /*galItem*/ 2) lightbox_changes.description = /*galItem*/ ctx[1];
 
     			if (dirty & /*$$scope*/ 1024) {
     				lightbox_changes.$$scope = { dirty, ctx };
@@ -11122,7 +11123,7 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ("modalOpen" in $$props) $$invalidate(0, modalOpen = $$props.modalOpen);
-    		if ("galItem" in $$props) $$invalidate(3, galItem = $$props.galItem);
+    		if ("galItem" in $$props) $$invalidate(1, galItem = $$props.galItem);
     	};
 
     	$$self.$capture_state = () => ({
@@ -11137,9 +11138,9 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ("modalOpen" in $$props) $$invalidate(0, modalOpen = $$props.modalOpen);
-    		if ("galItem" in $$props) $$invalidate(3, galItem = $$props.galItem);
-    		if ("dispatch" in $$props) $$invalidate(1, dispatch = $$props.dispatch);
-    		if ("img" in $$props) $$invalidate(2, img = $$props.img);
+    		if ("galItem" in $$props) $$invalidate(1, galItem = $$props.galItem);
+    		if ("dispatch" in $$props) $$invalidate(2, dispatch = $$props.dispatch);
+    		if ("img" in $$props) $$invalidate(3, img = $$props.img);
     		if ("num" in $$props) num = $$props.num;
     	};
 
@@ -11147,13 +11148,13 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [modalOpen, dispatch, img, galItem, click_handler, click_handler_1];
+    	return [modalOpen, galItem, dispatch, img, click_handler, click_handler_1];
     }
 
     class GalleryModal extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$d, create_fragment$d, safe_not_equal, { modalOpen: 0, galItem: 3 });
+    		init(this, options, instance$d, create_fragment$d, safe_not_equal, { modalOpen: 0, galItem: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -11165,7 +11166,7 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*galItem*/ ctx[3] === undefined && !("galItem" in props)) {
+    		if (/*galItem*/ ctx[1] === undefined && !("galItem" in props)) {
     			console_1.warn("<GalleryModal> was created without expected prop 'galItem'");
     		}
     	}
@@ -11237,11 +11238,11 @@ var app = (function () {
     			if (img.src !== (img_src_value = "/img/ClassRoom1.jpeg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", "ring-2 ring-gray-400");
-    			add_location(img, file$c, 29, 12, 1245);
+    			add_location(img, file$c, 29, 12, 1251);
     			attr_dev(h2, "class", "text-center font-bold text-blue-400 p-3 hover:text-blue-500");
-    			add_location(h2, file$c, 30, 12, 1326);
+    			add_location(h2, file$c, 30, 12, 1332);
     			attr_dev(div, "class", "max-w-110 p-5 bg-white shadow-md cursor-pointer");
-    			add_location(div, file$c, 28, 8, 1144);
+    			add_location(div, file$c, 28, 8, 1150);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11293,11 +11294,11 @@ var app = (function () {
     			if (img.src !== (img_src_value = "/img/logo2.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", "ring-2 ring-gray-400");
-    			add_location(img, file$c, 24, 8, 901);
+    			add_location(img, file$c, 24, 8, 907);
     			attr_dev(h2, "class", "text-center font-bold text-blue-400 p-3 hover:text-blue-500");
-    			add_location(h2, file$c, 25, 8, 972);
+    			add_location(h2, file$c, 25, 8, 978);
     			attr_dev(div, "class", "max-w-110 p-5 bg-white shadow-md cursor-pointer");
-    			add_location(div, file$c, 23, 7, 804);
+    			add_location(div, file$c, 23, 7, 810);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11433,9 +11434,9 @@ var app = (function () {
     			t2 = space();
     			if (if_block1) if_block1.c();
     			attr_dev(div, "class", "md:w-2/3 flex flex-col justify-center items-center");
-    			add_location(div, file$c, 20, 4, 605);
+    			add_location(div, file$c, 20, 4, 611);
     			attr_dev(section, "id", "Gallery");
-    			attr_dev(section, "class", "h-140 flex justify-center items-center flex-col");
+    			attr_dev(section, "class", "h-140 flex justify-center items-center flex-col py-10");
     			add_location(section, file$c, 18, 0, 481);
     		},
     		l: function claim(nodes) {
@@ -12514,7 +12515,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			p = element("p");
-    			p.textContent = "If you have a strong desire to achieve your dream and if it is not happening with your efforts?  Do not know where to begin and how to progress? we can help to sort it out with bespoke programmes that can cater your requirements at the relevant areas.";
+    			p.textContent = "If you have a strong desire to achieve your dream and if it is not happening with your efforts?  Do not know where to begin and how to progress? We can help to sort it out with bespoke programmes that can cater your requirements at the relevant areas.";
     			attr_dev(p, "class", "w-3/4 md:w-2/3 hidden md:block");
     			add_location(p, file$7, 15, 8, 667);
     		},
@@ -13350,9 +13351,9 @@ var app = (function () {
     			attr_dev(img, "alt", img_alt_value = /*Testimonial*/ ctx[0].img);
     			attr_dev(img, "class", "w-24 rounded-full");
     			add_location(img, file$4, 24, 8, 660);
-    			add_location(h4, file$4, 26, 12, 793);
-    			add_location(p, file$4, 27, 12, 833);
-    			attr_dev(div0, "class", "");
+    			add_location(h4, file$4, 26, 12, 799);
+    			add_location(p, file$4, 27, 12, 839);
+    			attr_dev(div0, "class", "w-full");
     			add_location(div0, file$4, 25, 8, 766);
     			attr_dev(div1, "class", "");
     			add_location(div1, file$4, 23, 4, 637);
@@ -13760,11 +13761,11 @@ var app = (function () {
     			h2 = element("h2");
     			h2.textContent = "What People say about Edustar?";
     			attr_dev(i, "class", "fas fa-quote-left absolute text-gray-300 text-6xl");
-    			add_location(i, file$2, 126, 37, 5823);
+    			add_location(i, file$2, 126, 37, 5808);
     			attr_dev(h2, "class", "text-left relative pt-10 pl-3");
-    			add_location(h2, file$2, 126, 102, 5888);
+    			add_location(h2, file$2, 126, 102, 5873);
     			attr_dev(div, "class", "");
-    			add_location(div, file$2, 126, 23, 5809);
+    			add_location(div, file$2, 126, 23, 5794);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -13952,18 +13953,18 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "absolute right-3 inline-block");
-    			add_location(div0, file$2, 127, 8, 5996);
+    			add_location(div0, file$2, 127, 8, 5981);
     			attr_dev(div1, "class", "");
-    			add_location(div1, file$2, 125, 4, 5771);
+    			add_location(div1, file$2, 125, 4, 5756);
     			attr_dev(div2, "class", "md:w-2/3");
-    			add_location(div2, file$2, 124, 3, 5744);
+    			add_location(div2, file$2, 124, 3, 5729);
     			attr_dev(div3, "class", "flex flex-col md:flex-row md:justify-evenly justify-center items-center flex-wrap py-10");
-    			add_location(div3, file$2, 133, 4, 6248);
-    			attr_dev(div4, "class", "h-105 overflow-hidden");
-    			add_location(div4, file$2, 132, 0, 6208);
+    			add_location(div3, file$2, 133, 4, 6233);
+    			attr_dev(div4, "class", "h-115 overflow-hidden");
+    			add_location(div4, file$2, 132, 0, 6193);
     			attr_dev(section, "id", "Testimonials");
     			attr_dev(section, "class", "p-5 flex flex-col justify-center items-center my-24 w-screen overflow-hidden");
-    			add_location(section, file$2, 123, 0, 5628);
+    			add_location(section, file$2, 123, 0, 5613);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -14097,7 +14098,7 @@ var app = (function () {
     		},
     		{
     			id: 6,
-    			title: "If you are an apirant of English language, Edustar International Education would be a top notch choice",
+    			title: "If you are an apirant of English language, Edustar Fastrack would be a top notch choice",
     			name: "Jismy jose",
     			designation: "Staff nurse Manchester University NHS Foundation trust",
     			content: "If you are an apirant of English language, Edustar International Education would be a top notch choice where you could find the best learning ambience I would rather say im much obliged to the unbeatable guidance provided by Dr. Sunil devaprabha in enhancing my English language proficiency to a much appreciated level",
@@ -14268,7 +14269,7 @@ var app = (function () {
     			add_location(i, file$1, 3, 12, 248);
     			attr_dev(div0, "class", "fixed right-5 bottom-5 bg-blue-500 text-white text-4xl rounded-full w-16 h-16 flex justify-center items-center hover:bg-blue-400");
     			add_location(div0, file$1, 2, 8, 93);
-    			attr_dev(a, "href", "https://api.whatsapp.com/send?phone=919744412045&text=");
+    			attr_dev(a, "href", "https://api.whatsapp.com/send?phone=919745971753&text=");
     			add_location(a, file$1, 1, 4, 19);
     			attr_dev(div1, "class", "");
     			add_location(div1, file$1, 0, 0, 0);

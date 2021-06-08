@@ -7,7 +7,7 @@
             <img src="/img/illustrations/Mission.png" alt="" class="">
         </div>
         <div class="p-5">
-            <p>EDU Star FASTRACK, a premier institute in IELTS was established with an aim to impart quality training to IELTS aspirants. This institute has been branched out to Spoken English, Teachers Training, Interview training and IELTS. Those who have passed out of this institute with flying colours bear testimony to the fact that EDU Star FASTRACK is something special. We provide hostel facilities too</p>
+            <p>EDUSTAR FASTRACK, a premier institute in IELTS was established with an aim to impart quality training to IELTS aspirants. This institute has been branched out to Spoken English, Teachers Training, Interview training and IELTS. Those who have passed out of this institute with flying colours bear testimony to the fact that Edustar Fastrack is something special. We provide hostel facilities too</p>
         </div>
         <div class="p-5 flex justify-evenly items-center">
             <img src="/img/devaprabha1.jpeg" alt="" class="w-36 md:w-48 rounded-full">

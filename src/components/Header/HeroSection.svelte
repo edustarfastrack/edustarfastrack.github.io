@@ -13,7 +13,7 @@ import { scrollto } from "svelte-scrollto";
         Fastrack your foreign Dreams with Edustar IELTS coaching
     </h1>
     <Subtext>
-        <p class="w-3/4 md:w-2/3 hidden md:block">If you have a strong desire to achieve your dream and if it is not happening with your efforts?  Do not know where to begin and how to progress? we can help to sort it out with bespoke programmes that can cater your requirements at the relevant areas.</p>
+        <p class="w-3/4 md:w-2/3 hidden md:block">If you have a strong desire to achieve your dream and if it is not happening with your efforts?  Do not know where to begin and how to progress? We can help to sort it out with bespoke programmes that can cater your requirements at the relevant areas.</p>
     </Subtext>
 <a href="#ContactUs" use:scrollto={'#ContactUs'}>
     <Button type="primary" rounded={true}>

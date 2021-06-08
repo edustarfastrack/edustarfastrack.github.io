@@ -27,16 +27,16 @@ if(modalOpen===true){
     dispatch("modalClose");
 }}>
 
-    <div class="bg-white p-5 rounded-md  m-5 flex items-center justify-center flex-wrap h-screen overflow-scroll relative">
+    <div class="bg-white p-5 rounded-md  m-5 flex items-center justify-center flex-wrap max-h-screen overflow-scroll relative">
         <div class="fixed cursor-pointer right-5 top-5" on:click={()=>{
             dispatch("modalClose");
         }}>
-            <i class="fas fa-window-close text-3xl text-red-600"></i>
+            <i class="fas fa-window-close text-3xl text-red-500"></i>
         </div>
         {#each img as imgItem}
      
        <div class=" w-full md:w-56 ring-2 m-3  relative" >
-        <Lightbox thumbnail imagePreset="fit" description="Lightbox with thumbnail and image">
+        <Lightbox thumbnail imagePreset="fit" description="{galItem}">
             <img slot="thumbnail" src="{imgItem}" alt="Thumbnail">
             <img slot="image" src="{imgItem}" alt="">
         </Lightbox>

@@ -23,7 +23,7 @@ const handleModalClose=()=>{
     <Subtext><slot></slot></Subtext>
     <div class="">
         <img src="/img/Testimonials/{Testimonial.img}" alt="{Testimonial.img}" class="w-24 rounded-full">
-        <div class="">
+        <div class="w-full">
             <h4>{Testimonial.name}</h4>
             <p>{Testimonial.designation}</p>
         </div>

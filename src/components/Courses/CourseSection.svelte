@@ -15,11 +15,11 @@ import CourseCard from "./CourseCard.svelte";
         The International English Language Testing System, or IELTS, is an international standardized test of English language proficiency for non-native English language speakers. It is jointly managed by the British Council, IDP: IELTS Australia and Cambridge Assessment English, and was established in 1989. With expert faculity, quality study materials and training EDUSTAR strives to provide you the best IELTS coaching out there.
     </CourseCard>
     <CourseCard cardTitle="Teachers Training" order="md:order-3 order-3">
-        EDU Star Fastrack Teacher Training seeks to provide rigorous personal and professional training to teachers in the most effective way possible, with a user-friendly platform. Our vision is to be an indispensable source of information, guidance and continuing education, striving towards achieving excellence in teaching. This is a journey through new avenues of self-discovery and self-improvement – after all, the best teachers are those who develop continuously with holistic learning!
+        Edustar Fastrack Teacher Training seeks to provide rigorous personal and professional training to teachers in the most effective way possible, with a user-friendly platform. Our vision is to be an indispensable source of information, guidance and continuing education, striving towards achieving excellence in teaching. This is a journey through new avenues of self-discovery and self-improvement – after all, the best teachers are those who develop continuously with holistic learning!
     </CourseCard>
 </div>
 <div class="bg-gray-100 p-5 md:w-2/3 m-auto">
-    <div class=" flex flex-wrap items-center justify-center">
+    <div class=" flex flex-wrap items-center justify-center text-xl">
         <div class="md:w-1/2 md:border-r-2">
             <div class="flex justify-center ">
                 <h3 class="p-2 font-Display font-bold">Online Classes: </h3>
