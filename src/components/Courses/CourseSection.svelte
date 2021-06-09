@@ -39,7 +39,7 @@ import CourseCard from "./CourseCard.svelte";
         </div>
         <div class="md:w-1/2 font-Display">
             <p class="font-bold underline p-2">Join Our whatsapp group to avail following facilities</p>
-            <ul class="text-left px-5">
+            <ul class="text-left px-4">
                 <li><i class="fas fa-plane text-blue-400"></i> Get A,G Reading Tests Free</li>
                 <li><i class="fas fa-plane text-blue-400"></i>  Get Speaking cue Cards Free</li>
                 <li><i class="fas fa-plane text-blue-400"></i> Buy Our Speaking & Reading Book</li>

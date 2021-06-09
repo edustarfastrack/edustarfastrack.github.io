@@ -70,7 +70,7 @@ $:intersecting?value.set(100):value.set(0);
             <div class="md:text-right md:w-2/3">
                
                 <h2 class="font-Display font-bold text-3xl p-2">Certified & Trustworthy</h2>
-                <p class="p-2">Sunil Devaprabha completed his <strong>PhD in Education (Effective Pedagogy)</strong>  from Commonwealth Vocational University New-Delhi a Registered agent of CVU Nuku’alofa, Tongatapu, Kingdom of Tonga
+                <p class="p-2">Sunil Devaprabha completed his <strong>PhD in Education (Effective Pedagogy)</strong>  from Commonwealth Vocational University New-Delhi a Registered agent of CVU Nuku’alofa, Tongatapu, Kingdom of Tonga.
                     He is a certified <strong>`Train the Trainer’</strong>  by the <strong>British Council-Chennai</strong>  and <strong>IDP-Kochi</strong> .
                     </p>
             </div>

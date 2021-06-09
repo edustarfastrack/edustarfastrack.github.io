@@ -11,7 +11,7 @@ let Testimonials =[{
     id:1,
     title:"Best IELTS training center one can find!",
     name:"Angel Rose Kannadan",
-    designation:"Regd Nurse,Australia",
+    designation:"Regd Nurse, Australia",
     content:"Edustar is the best IELTS training center one can find. When I first joined I was nervous and not confident at all for attending the IELTS exam. But with just one month class, my standard of English along with my confidence increased to a great extend.My instructor Sunil sir was very friendly and professional. He always available for help and supported me to prepare better for my weakest sections and at the same time gave me valuable feedback on my performance based on the regular practice tests in the class. The advice I got really helped me face the test with more confidence and helped me to achieve my desired score of individual 7. Study material provided by Edustar was a very good resource for preparing for IELTS.All thanks to Sunil sir who was with me in every step of my way.I highly recommend Edustar Academy to all IELTS preparing candidates.",
     img:"AngelRose.jpeg"
 },{
@@ -31,7 +31,7 @@ let Testimonials =[{
 },{
     id:4,
     title:"My heartfelt thanks to EDUSTAR IELTS Academy",
-    name:"George Kutty",
+    name:"Georgekutty",
     designation:"Canada",
     content:"Dr.Sunil Sir , his way of teaching and giving attention to each student is nice.Practice makes man perfect, so this is also a place where practice gain, learnt many things during his classes.  It helps me to pin point my week areas/skills in English.He shared a lot of material to help improve our vocabulary. We were also given a lot of practice material and online practice sessions.He kept all the sessions interactive and constantly helped us improve in all aspects.Overall this is an excellent academy to recommend others. my heartfelt thanks to EDUSTAR IELTS Academy.",
     img:"GeorgeKutty.jpg"
