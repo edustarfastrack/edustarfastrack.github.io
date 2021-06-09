@@ -2678,7 +2678,7 @@ var app = (function () {
     			t22 = text("Sunil Devaprabha completed his ");
     			strong4 = element("strong");
     			strong4.textContent = "PhD in Education (Effective Pedagogy)";
-    			t24 = text("  from Commonwealth Vocational University New-Delhi a Registered agent of CVU Nuku’alofa, Tongatapu, Kingdom of Tonga\n                    He is a certified ");
+    			t24 = text("  from Commonwealth Vocational University New-Delhi a Registered agent of CVU Nuku’alofa, Tongatapu, Kingdom of Tonga.\n                    He is a certified ");
     			strong5 = element("strong");
     			strong5.textContent = "`Train the Trainer’";
     			t26 = text("  by the ");
@@ -2731,9 +2731,9 @@ var app = (function () {
     			attr_dev(h22, "class", "font-Display font-bold text-3xl p-2");
     			add_location(h22, file$A, 71, 16, 4763);
     			add_location(strong4, file$A, 72, 62, 4902);
-    			add_location(strong5, file$A, 73, 38, 5112);
-    			add_location(strong6, file$A, 73, 83, 5157);
-    			add_location(strong7, file$A, 73, 129, 5203);
+    			add_location(strong5, file$A, 73, 38, 5113);
+    			add_location(strong6, file$A, 73, 83, 5158);
+    			add_location(strong7, file$A, 73, 129, 5204);
     			attr_dev(p2, "class", "p-2");
     			add_location(p2, file$A, 72, 16, 4856);
     			attr_dev(div8, "class", "md:text-right md:w-2/3");
@@ -4447,7 +4447,7 @@ var app = (function () {
     	contactswbtn1 = new ContactSwBtn({
     			props: {
     				icon: "map-marker-alt",
-    				subtext: "Nedumkanadam, Idukki",
+    				subtext: "Nedumkandam, Idukki",
     				selected: /*currentItem*/ ctx[0] === "Address" ? true : false
     			},
     			$$inline: true
@@ -6554,7 +6554,7 @@ var app = (function () {
     			attr_dev(i3, "class", "fas fa-plane text-blue-400");
     			add_location(i3, file$m, 45, 20, 3340);
     			add_location(li8, file$m, 45, 16, 3336);
-    			attr_dev(ul2, "class", "text-left px-5");
+    			attr_dev(ul2, "class", "text-left px-4");
     			add_location(ul2, file$m, 41, 12, 3000);
     			attr_dev(p1, "class", "font-bold text-red-400 p-5");
     			add_location(p1, file$m, 47, 13, 3445);
@@ -12487,7 +12487,7 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			t = text("Edustar Nedumkandam");
+    			t = text("Edustar Fastrack Nedumkandam");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
@@ -12517,7 +12517,7 @@ var app = (function () {
     			p = element("p");
     			p.textContent = "If you have a strong desire to achieve your dream and if it is not happening with your efforts?  Do not know where to begin and how to progress? We can help to sort it out with bespoke programmes that can cater your requirements at the relevant areas.";
     			attr_dev(p, "class", "w-3/4 md:w-2/3 hidden md:block");
-    			add_location(p, file$7, 15, 8, 667);
+    			add_location(p, file$7, 15, 8, 685);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -12620,7 +12620,7 @@ var app = (function () {
     			create_component(largeheading.$$.fragment);
     			t0 = space();
     			h1 = element("h1");
-    			h1.textContent = "Fastrack your foreign Dreams with Edustar IELTS coaching";
+    			h1.textContent = "Fastrack your foreign Dreams with Edustar Fastrack IELTS coaching";
     			t2 = space();
     			create_component(subtext.$$.fragment);
     			t3 = space();
@@ -12631,9 +12631,9 @@ var app = (function () {
     			t5 = space();
     			create_component(heroimgs1.$$.fragment);
     			attr_dev(h1, "class", "text-4xl md:text-5xl lg:text-6xl p-5 font-Display font-semibold");
-    			add_location(h1, file$7, 11, 4, 493);
+    			add_location(h1, file$7, 11, 4, 502);
     			attr_dev(a, "href", "#ContactUs");
-    			add_location(a, file$7, 17, 0, 980);
+    			add_location(a, file$7, 17, 0, 998);
     			attr_dev(div0, "class", "md:w-1/2");
     			add_location(div0, file$7, 9, 4, 413);
     			attr_dev(div1, "class", "text-center flex flex-col justify-center items-center h-full py-36 md:py-48 md:pt-56 md:pb-36 mb-48 md:mb-0 relative");
@@ -14060,7 +14060,7 @@ var app = (function () {
     			id: 1,
     			title: "Best IELTS training center one can find!",
     			name: "Angel Rose Kannadan",
-    			designation: "Regd Nurse,Australia",
+    			designation: "Regd Nurse, Australia",
     			content: "Edustar is the best IELTS training center one can find. When I first joined I was nervous and not confident at all for attending the IELTS exam. But with just one month class, my standard of English along with my confidence increased to a great extend.My instructor Sunil sir was very friendly and professional. He always available for help and supported me to prepare better for my weakest sections and at the same time gave me valuable feedback on my performance based on the regular practice tests in the class. The advice I got really helped me face the test with more confidence and helped me to achieve my desired score of individual 7. Study material provided by Edustar was a very good resource for preparing for IELTS.All thanks to Sunil sir who was with me in every step of my way.I highly recommend Edustar Academy to all IELTS preparing candidates.",
     			img: "AngelRose.jpeg"
     		},
@@ -14083,7 +14083,7 @@ var app = (function () {
     		{
     			id: 4,
     			title: "My heartfelt thanks to EDUSTAR IELTS Academy",
-    			name: "George Kutty",
+    			name: "Georgekutty",
     			designation: "Canada",
     			content: "Dr.Sunil Sir , his way of teaching and giving attention to each student is nice.Practice makes man perfect, so this is also a place where practice gain, learnt many things during his classes.  It helps me to pin point my week areas/skills in English.He shared a lot of material to help improve our vocabulary. We were also given a lot of practice material and online practice sessions.He kept all the sessions interactive and constantly helped us improve in all aspects.Overall this is an excellent academy to recommend others. my heartfelt thanks to EDUSTAR IELTS Academy.",
     			img: "GeorgeKutty.jpg"
