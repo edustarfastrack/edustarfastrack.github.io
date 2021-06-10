@@ -1,6 +1,7 @@
 <script>
 import { createEventDispatcher } from "svelte";
 import {Lightbox} from 'svelte-lightbox';
+
 export let modalOpen=false;
 export let galItem;
 let dispatch=createEventDispatcher();
@@ -35,14 +36,16 @@ if(modalOpen===true){
         </div>
         {#each img as imgItem}
      
-       <div class=" w-full md:w-56 ring-2 m-3  relative" >
-        <Lightbox thumbnail imagePreset="fit" description="{galItem}">
-            <img slot="thumbnail" src="{imgItem}" alt="Thumbnail">
-            <img slot="image" src="{imgItem}" alt="">
-        </Lightbox>
-        
-        
-       </div>
+        <div class=" w-full md:w-56 ring-2 m-3  relative" >
+            <Lightbox thumbnail imagePreset="fit" description="{galItem}">
+                <img slot="thumbnail" src="{imgItem}" alt="Thumbnail">
+                <img slot="image" src="{imgItem}" alt="">
+            </Lightbox>
+            
+            
+           </div>
+    
+       
        {/each}
     </div>
     

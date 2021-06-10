@@ -8,13 +8,13 @@ let images=[{
         id:1,
         name:"scoreSheet1.jpeg",
         studentName:"Josna",
-        score:7.2
+        score:7.5
 
     },{
         id:2,
         name:"scoreSheet2.jpeg",
         studentName:"Mariyamma",
-        score:7.2
+        score:8.0
 
     }]
 let maxImage=2,currentImage=1;
